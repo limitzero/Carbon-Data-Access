@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Carbon.Repository</RootNamespace>
+    <AssemblyName>Carbon.Repository</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoPersistance\Builders\ComponentBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\EntityBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\ForeignKeyNameBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\IBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildComponent.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildEntityDefinition.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildForeignKeyName.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildPrimaryKey.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildPrimaryKeyName.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildProperty.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildSubClass.cs" />
+    <Compile Include="AutoPersistance\Builders\PrimaryKeyBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\PrimaryKeyNameBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\PropertyBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\SubClassBuilder.cs" />
+    <Compile Include="AutoPersistance\Core\AbstractAutoPersistanceModel.cs" />
+    <Compile Include="AutoPersistance\Core\AutoPersistanceModel.cs" />
+    <Compile Include="AutoPersistance\Core\BaseRelationshipStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\Common.cs" />
+    <Compile Include="AutoPersistance\Core\Convention.cs" />
+    <Compile Include="AutoPersistance\Core\EntityModel.cs" />
+    <Compile Include="AutoPersistance\Core\EntityNamespace.cs" />
+    <Compile Include="AutoPersistance\Core\ForeignKeyNamingConvention.cs" />
+    <Compile Include="AutoPersistance\Core\IAutoPersistanceModel.cs" />
+    <Compile Include="AutoPersistance\Core\IConventionProvider.cs" />
+    <Compile Include="AutoPersistance\Core\Inflector.cs" />
+    <Compile Include="AutoPersistance\Core\IPersistanceModelProvider.cs" />
+    <Compile Include="AutoPersistance\Core\IRelationship.cs" />
+    <Compile Include="AutoPersistance\Core\ManyToManyNamingConvention.cs" />
+    <Compile Include="AutoPersistance\Core\ManyToManyRelationshipStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\ManyToOneRelationshipStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\MemberAccessConvention.cs" />
+    <Compile Include="AutoPersistance\Core\PrimaryKeyColumnConvention.cs" />
+    <Compile Include="AutoPersistance\Core\PropertyConvention.cs" />
+    <Compile Include="AutoPersistance\LocalMappingConventionProvider.cs" />
+    <Compile Include="AutoPersistance\LocalPersistanceModelProvider.cs" />
+    <Compile Include="AutoPersistance\Persistance\IPersistanceStrategy.cs" />
+    <Compile Include="AutoPersistance\Persistance\Strategies\DefaultPersistanceStrategy.cs" />
+    <Compile Include="ForTesting\BaseAutoPersistanceTestFixture.cs" />
+    <Compile Include="HttpModule\NHibernateSessionPerRequestHttpModule.cs" />
+    <Compile Include="Repository\AbstractQuerySpecification.cs" />
+    <Compile Include="Repository\IQuerySpecification.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IRepositoryFactory.cs" />
+    <Compile Include="Repository\NHibernateAutoPersistanceRepositoryFactory.cs" />
+    <Compile Include="Repository\NHibernateRepository.cs" />
+    <Compile Include="Repository\NHibernateRepositoryFactory.cs" />
+    <Compile Include="Repository\NHibernateSessionManager.cs" />
+    <Compile Include="Repository\PaginatedResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

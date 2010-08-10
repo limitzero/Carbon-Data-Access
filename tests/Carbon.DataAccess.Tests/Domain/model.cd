@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Giza.ORM.Tests.ORM.Domain.Address" Collapsed="true">
+    <Position X="3.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACEAAAAAAAAAAIIABECAAAAAAAAAAAAAAABEACAAA=</HashCode>
+      <FileName>ORM\Domain\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Giza.ORM.Tests.ORM.Domain.HomeAddress" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>ORM\Domain\HomeAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Giza.ORM.Tests.ORM.Domain.ShippingAddress" Collapsed="true">
+    <Position X="6.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ORM\Domain\HomeAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Giza.ORM.Tests.ORM.Domain.Order" Collapsed="true">
+    <Position X="3.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QcACAAAEUAAAAAAEAQBAAgAAggAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>ORM\Domain\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HomeAddress" />
+      <Property Name="ShippingAddress" />
+      <Property Name="Status" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orderlines" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Giza.ORM.Tests.ORM.Domain.OrderLine" Collapsed="true">
+    <Position X="7.25" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAABAABAAAAAAAAAAAAAAIAAgAAAAAg=</HashCode>
+      <FileName>ORM\Domain\OrderLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Giza.ORM.Tests.ORM.Domain.OrderStatus">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAAAEAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ORM\Domain\OrderStatus.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Giza.ORM.Tests.ORM.Domain.Product" Collapsed="true">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACIAAAAQAgAAAEAABAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ORM\Domain\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Giza.ORM.Tests.ORM.Domain.OrderStatusEnum" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
+      <FileName>ORM\Domain\OrderStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
