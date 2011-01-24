@@ -5,9 +5,9 @@
       <generator class="identity" />
     </id>
     <!-- properties for entity 'Product' -->
-    <property name="CreatedOn" column="createdon" type="System.DateTime" not-null="false" length="200" access="nosetter.lowercase-underscore" />
-    <property name="Description" column="description" type="String" length="200" access="nosetter.lowercase-underscore" />
-    <property name="Name" column="name" type="String" length="200" access="nosetter.lowercase-underscore" />
-    <property name="Price" column="price" type="System.Decimal" not-null="false" length="200" access="nosetter.lowercase-underscore" />
+    <property name="CreatedOn" column="CreatedOn" type="System.DateTime" not-null="false" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Description" column="Description" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Name" column="Name" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Price" column="Price" type="System.Decimal" not-null="false" length="200" access="nosetter.lowercase-underscore" />
   </class>
 </hibernate-mapping>

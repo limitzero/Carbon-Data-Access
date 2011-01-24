@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Carbon.DataAccess.Tests.Domain;
-using Carbon.Repository.Repository;
 using Carbon.Repository.ForTesting;
-using Xunit;
+using Carbon.Repository.Repository;
 using NHibernate.Criterion;
+using Xunit;
 
 namespace Carbon.DataAccess.Tests.Repository
 {

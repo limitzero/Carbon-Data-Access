@@ -5,6 +5,6 @@
       <generator class="identity" />
     </id>
     <!-- properties for entity 'OrderPriority' -->
-    <property name="Priority" column="priority" type="Carbon.DataAccess.Tests.Domain.OrderPriorityEnums, Carbon.DataAccess.Tests" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Priority" column="Priority" type="Carbon.DataAccess.Tests.Domain.OrderPriorityEnums, Carbon.DataAccess.Tests" length="200" access="nosetter.lowercase-underscore" />
   </class>
 </hibernate-mapping>

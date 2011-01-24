@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Carbon.Repository.AutoPersistance.Strategies;
 
 namespace Carbon.Repository.AutoPersistance.Core
 {
@@ -69,6 +70,16 @@ namespace Carbon.Repository.AutoPersistance.Core
             get { return _manyToManyNamingConvention; }
         }
 
+        /// <summary>
+        /// Gets the current custom naming strategy for the column names 
+        ///  in the mapping file to be reflected in the database.
+        /// </summary>
+        public IColumnNamingStrategy PropertyNamingStrategy 
+        { 
+            get;
+            private set;
+        }
+
         public Convention()
         {
             _primaryKey = new PrimaryKeyColumnConvention<Convention>(this);
@@ -86,6 +97,15 @@ namespace Carbon.Repository.AutoPersistance.Core
         {
             _pluralizeTableNames = true;
             return this;
+        }
+
+        /// <summary>
+        /// Sets the custom naming strategy to use for the columns in the database as a result of the auto-mapping.
+        /// </summary>
+        /// <param name="propertyNamingStrategy"></param>
+        public void SetColumnNamingStrategy(IColumnNamingStrategy propertyNamingStrategy)
+        {
+            this.PropertyNamingStrategy = propertyNamingStrategy;
         }
 
     }

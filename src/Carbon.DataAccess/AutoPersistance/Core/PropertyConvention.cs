@@ -59,6 +59,5 @@ namespace Carbon.Repository.AutoPersistance.Core
             _canRenderAsLowerCase = true;
             return _reference;
         }
-
     }
-    }
+}

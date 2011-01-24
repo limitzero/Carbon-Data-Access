@@ -104,6 +104,7 @@
     <Compile Include="AutoPersistance\LocalPersistanceModelProvider.cs" />
     <Compile Include="AutoPersistance\Persistance\IPersistanceStrategy.cs" />
     <Compile Include="AutoPersistance\Persistance\Strategies\DefaultPersistanceStrategy.cs" />
+    <Compile Include="AutoPersistance\Strategies\IPropertyNamingStrategy.cs" />
     <Compile Include="ForTesting\BaseAutoPersistanceTestFixture.cs" />
     <Compile Include="HttpModule\NHibernateSessionPerRequestHttpModule.cs" />
     <Compile Include="Repository\AbstractQuerySpecification.cs" />

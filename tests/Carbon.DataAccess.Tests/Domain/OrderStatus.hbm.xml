@@ -5,6 +5,6 @@
       <generator class="identity" />
     </id>
     <!-- properties for entity 'OrderStatus' -->
-    <property name="Status" column="status" type="Carbon.DataAccess.Tests.Domain.OrderStatusEnum, Carbon.DataAccess.Tests" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Status" column="Status" type="Carbon.DataAccess.Tests.Domain.OrderStatusEnum, Carbon.DataAccess.Tests" length="200" access="nosetter.lowercase-underscore" />
   </class>
 </hibernate-mapping>

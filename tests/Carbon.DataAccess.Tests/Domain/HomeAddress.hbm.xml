@@ -5,11 +5,11 @@
       <generator class="identity" />
     </id>
     <!-- properties for entity 'HomeAddress' -->
-    <property name="YearsAtResidence" column="yearsatresidence" type="Int32" length="200" access="nosetter.lowercase-underscore" />
-    <property name="Address1" column="address1" type="String" length="200" access="nosetter.lowercase-underscore" />
-    <property name="Address2" column="address2" type="String" length="200" access="nosetter.lowercase-underscore" />
-    <property name="City" column="city" type="String" length="200" access="nosetter.lowercase-underscore" />
-    <property name="State" column="state" type="String" length="200" access="nosetter.lowercase-underscore" />
-    <property name="PostalCode" column="postalcode" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="YearsAtResidence" column="YearsAtResidence" type="Int32" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Address1" column="Address1" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="Address2" column="Address2" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="City" column="City" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="State" column="State" type="String" length="200" access="nosetter.lowercase-underscore" />
+    <property name="PostalCode" column="PostalCode" type="String" length="200" access="nosetter.lowercase-underscore" />
   </class>
 </hibernate-mapping>

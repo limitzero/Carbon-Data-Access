@@ -192,8 +192,30 @@ namespace Carbon.Repository.AutoPersistance.Builders
                 builder.Append(ORMUtils.BuildAttribute("name", property.Name));
 
                 //attribute: column
-                if (m_convention.Property.CanRenderAsLowerCase)
+                var columnName = property.Name;
+
+                if (m_convention.PropertyNamingStrategy != null)
+                {
+                    if (property.PropertyType.FullName.StartsWith(typeof(Nullable<>).FullName) == true)
+                    {
+                        // supporting nullable types (i.e. DateTime?, int?, etc.)..
+                        var declaringType = FindUnderlyingNullableType(property.PropertyType);
+                        columnName = m_convention.PropertyNamingStrategy.Execute(property.Name, declaringType);    
+                    }
+                    else
+                    {
+                        columnName = m_convention.PropertyNamingStrategy.Execute(property.Name, property.PropertyType);    
+                    }
+                }
+                
+                if(columnName != string.Empty)
+                {
+                    builder.Append(ORMUtils.BuildAttribute("column", columnName));
+                }
+                else if (m_convention.Property.CanRenderAsLowerCase)
+                {
                     builder.Append(ORMUtils.BuildAttribute("column", property.Name.ToLower()));
+                }
 
                 //attribute: type
                 if (property.PropertyType.FullName.Contains("System"))
@@ -290,6 +312,11 @@ namespace Carbon.Repository.AutoPersistance.Builders
             if (typeof(Nullable<>).MakeGenericType(typeof(Single)) == nullableType)
             {
                 underlyingType = typeof(decimal);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(short)) == nullableType)
+            {
+                underlyingType = typeof(short);
             }
 
             return underlyingType;

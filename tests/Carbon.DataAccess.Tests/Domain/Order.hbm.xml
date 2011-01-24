@@ -5,7 +5,7 @@
       <generator class="identity" />
     </id>
     <!-- properties for entity 'Order' -->
-    <property name="CreationDate" column="creationdate" type="DateTime" length="200" access="nosetter.lowercase-underscore" />
+    <property name="CreationDate" column="CreationDate" type="DateTime" length="200" access="nosetter.lowercase-underscore" />
     <!-- many "Order" are associated with one instance of a "OrderStatus" -->
     <many-to-one name="Status" class="OrderStatus" cascade="all" access="nosetter.lowercase-underscore" column="orderstatusID" foreign-key="fk_OrderStatus_has_instances_of_Order" fetch="join" not-found="ignore" />
     <!-- many "Order" are associated with one instance of a "OrderPriority" -->
