@@ -120,7 +120,9 @@ namespace Carbon.Repository.AutoPersistance.Builders
                 typeof(float),
                 typeof(float?),
                 typeof(bool),
-                typeof(bool?)
+                typeof(bool?), 
+                typeof(short),
+                typeof(short?)
                 });
 
             IList<PropertyInfo> properties = new List<PropertyInfo>(entity.GetProperties());

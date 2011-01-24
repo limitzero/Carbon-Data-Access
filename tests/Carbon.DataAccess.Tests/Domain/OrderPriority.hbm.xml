@@ -1,1 +1,10 @@
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Carbon.DataAccess.Tests" namespace="Carbon.DataAccess.Tests.Domain" default-lazy="false"><!-- entity: OrderPriority --><class name="OrderPriority" table="OrderPriorities"><id name="Id" column="orderpriorityID" type="Int32" access="nosetter.camelcase-underscore"><generator class="identity" /></id><!-- properties for entity 'OrderPriority' --><property name="Priority" column="priority" type="Carbon.DataAccess.Tests.Domain.OrderPriorityEnums, Carbon.DataAccess.Tests" length="200" access="nosetter.lowercase-underscore" /></class></hibernate-mapping>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Carbon.DataAccess.Tests" namespace="Carbon.DataAccess.Tests.Domain" default-lazy="false">
+  <!-- entity: OrderPriority -->
+  <class name="OrderPriority" table="OrderPriorities">
+    <id name="Id" column="orderpriorityID" type="Int32" access="nosetter.camelcase-underscore">
+      <generator class="identity" />
+    </id>
+    <!-- properties for entity 'OrderPriority' -->
+    <property name="Priority" column="priority" type="Carbon.DataAccess.Tests.Domain.OrderPriorityEnums, Carbon.DataAccess.Tests" length="200" access="nosetter.lowercase-underscore" />
+  </class>
+</hibernate-mapping>
