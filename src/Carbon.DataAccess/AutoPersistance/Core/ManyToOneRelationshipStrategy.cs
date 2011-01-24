@@ -46,16 +46,28 @@ namespace Carbon.Repository.AutoPersistance.Core
             IList<Type> results = new List<Type>(); 
 
             ConstructorInfo[] constructors = entity.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+            ConstructorInfo theConstructor = null; 
 
             foreach (ConstructorInfo info in constructors)
             {
-                foreach (ParameterInfo param in info.GetParameters())
+                if(theConstructor == null)
                 {
-                    if (modelEntities.Contains(param.ParameterType) && ORMUtils.FindIdentityFieldFor(_convention, param.ParameterType) != null)
-                    {
-                        if(!results.Contains(param.ParameterType))
-                            results.Add(param.ParameterType);
-                    }
+                    theConstructor = info;    
+                }
+
+                // find the greediest constructor for basing this relationship on:
+                if(theConstructor.GetParameters().Length < info.GetParameters().Length)
+                {
+                    theConstructor = info;
+                }
+            }
+
+            foreach (ParameterInfo param in theConstructor.GetParameters())
+            {
+                if (modelEntities.Contains(param.ParameterType) && ORMUtils.FindIdentityFieldFor(_convention, param.ParameterType) != null)
+                {
+                    if (!results.Contains(param.ParameterType))
+                        results.Add(param.ParameterType);
                 }
             }
 

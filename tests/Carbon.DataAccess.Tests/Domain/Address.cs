@@ -4,77 +4,51 @@ using System.Text;
 
 namespace Carbon.DataAccess.Tests.Domain
 {
-    public  class Address
+    public abstract class Address
     {
-        private int _id = 0;
         private string _address1;
         private string _address2;
         private string _city;
         private string _state;
         private string _postalcode;
 
-        public int Id
+        public virtual string Address1
         {
-            get
-            {
-                return _id;
-            }
-
+            get { return _address1; }
+            set { _address2 = value; }
         }
 
-        public string Address1
+        public virtual string Address2
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return _address2; }
+            set { _address2 = value; }
         }
 
-        public string Address2
+        public virtual string City
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return _city; }
+            set { _city = value; }
         }
 
-        public string City
+        public virtual string State
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return _state; }
+            set { _state = value; }
         }
 
-        public string State
+        public virtual string PostalCode
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get { return _postalcode; }
+            set { _postalcode = value; }
         }
 
-        public string PostalCode
+        public virtual void ChangeAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            this.Address1 = addressLine1;
+            this.Address2 = addressLine2;
+            this.City = city;
+            this.State = state;
+            this.PostalCode = postalCode;
         }
     }
 }

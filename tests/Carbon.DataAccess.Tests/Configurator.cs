@@ -21,7 +21,7 @@ namespace Carbon.DataAccess.Tests
             model.Assembly("Carbon.DataAccess.Tests");
             model.Namespace.EndsWith("Domain");
 
-            model.WriteMappingsTo(@"C:\Work\Playground\Carbon.DataAccess\tests\Carbon.DataAccess.Tests\Domain");
+            model.WriteMappingsTo(@"C:\repositories\Carbon-Data-Access\tests\Carbon.DataAccess.Tests\Domain");
 
             return model;
         }

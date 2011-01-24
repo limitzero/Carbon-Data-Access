@@ -95,9 +95,33 @@ namespace Carbon.Repository.AutoPersistance.Builders
 
         private IList<PropertyInfo> FindPropertiesFor(Type entity, out IList<PropertyInfo> exclusions)
         {
-            // delineate all data primatives that can be automatically rendered:
-            IList<Type> typesToRender = new List<Type>(new Type[] { typeof(String), typeof(Enum), typeof(DateTime), 
-                                                                    typeof(Int32), typeof(Int16), typeof(Byte), typeof(bool)});
+            // TODO: delineate all data primatives that can be automatically rendered:
+            IList<Type> typesToRender = new List<Type>(new Type[] { 
+                typeof(int),
+                typeof(int?),
+                typeof(string),
+                typeof(String), 
+                typeof(Enum), 
+                typeof(DateTime), 
+                typeof(DateTime?),
+                typeof(Int32), 
+                typeof(Int32?),
+                typeof(Int16), 
+                typeof(Int16?),
+                typeof(Int64), 
+                typeof(Int64?),
+                typeof(Byte), 
+                typeof(decimal),    
+                typeof(decimal?),
+                typeof(Decimal), 
+                typeof(Decimal?), 
+                typeof(Single),                                                
+                typeof(Single?), 
+                typeof(float),
+                typeof(float?),
+                typeof(bool),
+                typeof(bool?)
+                });
 
             IList<PropertyInfo> properties = new List<PropertyInfo>(entity.GetProperties());
 
@@ -172,7 +196,18 @@ namespace Carbon.Repository.AutoPersistance.Builders
                 //attribute: type
                 if (property.PropertyType.FullName.Contains("System"))
                 {
-                    builder.Append(ORMUtils.BuildAttribute("type", property.PropertyType.Name));
+                    if(property.PropertyType.FullName.StartsWith(typeof(Nullable<>).FullName) == true)
+                    {
+                        // supporting nullable types (i.e. DateTime?, int?, etc.)..
+                        var declaringType = FindUnderlyingNullableType(property.PropertyType);
+                        builder.Append(ORMUtils.BuildAttribute("type", declaringType.FullName));
+                        builder.Append(ORMUtils.BuildAttribute("not-null", "false"));
+                    }
+                    else
+                    {
+                        builder.Append(ORMUtils.BuildAttribute("type", property.PropertyType.Name));
+                    }
+                   
                 }
                 else
                 {
@@ -210,5 +245,52 @@ namespace Carbon.Repository.AutoPersistance.Builders
 
         }
 
+        private Type FindUnderlyingNullableType(Type nullableType)
+        {
+            Type underlyingType = null;
+
+            if(typeof(Nullable<>).MakeGenericType(typeof(DateTime)) == nullableType)
+            {
+                underlyingType = typeof (DateTime);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(Int16)) == nullableType)
+            {
+                underlyingType = typeof(Int16);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(Int32)) == nullableType)
+            {
+                underlyingType = typeof(Int32);
+            }
+
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(Int64)) == nullableType)
+            {
+                underlyingType = typeof(Int64);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(float)) == nullableType)
+            {
+                underlyingType = typeof(float);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(Decimal)) == nullableType)
+            {
+                underlyingType = typeof(Decimal);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(decimal)) == nullableType)
+            {
+                underlyingType = typeof(Decimal);
+            }
+
+            if (typeof(Nullable<>).MakeGenericType(typeof(Single)) == nullableType)
+            {
+                underlyingType = typeof(decimal);
+            }
+
+            return underlyingType;
+        }
     }
 }

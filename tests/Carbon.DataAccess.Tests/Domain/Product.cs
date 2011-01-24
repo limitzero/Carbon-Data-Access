@@ -4,12 +4,14 @@ using System.Text;
 
 namespace Carbon.DataAccess.Tests.Domain
 {
+    // nullables put here for library support for auto-mapping:
     public class Product
     {
         private string _name = string.Empty;
         private string _description = string.Empty;
-        private decimal _price =0.0M;
+        private decimal? _price =0.0M;
         private int _id = 0;
+        private DateTime? _createdon;
 
         protected Product()
         {
@@ -24,6 +26,11 @@ namespace Carbon.DataAccess.Tests.Domain
         }
 
 
+        public virtual DateTime? CreatedOn
+        {
+            get { return _createdon; }
+            set { _createdon = value; }
+        }
 
         public virtual string Description
         {
@@ -49,7 +56,7 @@ namespace Carbon.DataAccess.Tests.Domain
             }
         }
 
-        public virtual decimal Price
+        public virtual decimal? Price
         {
             get
             {

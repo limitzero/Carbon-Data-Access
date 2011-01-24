@@ -8,7 +8,7 @@ namespace Carbon.DataAccess.Tests.Domain
     {
         private IList<OrderLine> _orderlines = new List<OrderLine>();
         private int _id;
-        private Address _homeaddress;
+        private HomeAddress _homeaddress;
         private ShippingAddress _shippingaddress;
         private DateTime _creationdate = System.DateTime.Now;
         private OrderStatus _status;
@@ -18,9 +18,19 @@ namespace Carbon.DataAccess.Tests.Domain
         {}
 
         public Order(OrderStatus status, OrderPriority priority)
+            :this(status, priority, null, null)
+        {
+        }
+
+        public Order(OrderStatus status, 
+            OrderPriority priority, 
+            HomeAddress homeAddress, 
+            ShippingAddress shippingAddress)
         {
             _status = status;
             _priority = priority;
+            _homeaddress = homeAddress;
+            _shippingaddress = _shippingaddress;
         }
 
         public virtual int Id
@@ -43,7 +53,7 @@ namespace Carbon.DataAccess.Tests.Domain
         /// <summary>
         /// (Read-Only)
         /// </summary>
-        public virtual Address HomeAddress
+        public virtual HomeAddress HomeAddress
         {
             get
             {
@@ -108,6 +118,18 @@ namespace Carbon.DataAccess.Tests.Domain
         {
             if (!_orderlines.Contains(lineItem))
                 _orderlines.Add(lineItem);
+        }
+
+        public void ChangeHomeAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
+        {
+            this.HomeAddress = new HomeAddress();
+            this.HomeAddress.ChangeAddress(addressLine1, addressLine2, city, state, postalCode);
+        }
+
+         public void ChangeShippingAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
+        {
+            this.ShippingAddress = new ShippingAddress();
+            this.ShippingAddress.ChangeAddress(addressLine1, addressLine2, city, state, postalCode);
         }
     }
 }

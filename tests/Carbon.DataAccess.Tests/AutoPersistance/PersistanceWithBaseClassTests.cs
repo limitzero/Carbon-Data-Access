@@ -37,6 +37,30 @@ namespace Carbon.DataAccess.Tests.AutoPersistance
         }
 
         [Fact]
+        public void can_save_home_address_to_order()
+        {
+            var order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextDayAir));
+            order.ChangeHomeAddress("123 Street", "E 53rd", "New York", "NY", "54433");
+
+            Repository.Save<Order>(order);
+
+            var fromDB = Repository.FindById<Order>(order.Id);
+            Assert.Equal(order.HomeAddress.Id, fromDB.HomeAddress.Id);
+        }
+
+        [Fact]
+        public void can_save_shipping_address_to_order()
+        {
+            var order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextDayAir));
+            order.ChangeShippingAddress("123 Street", "E 53rd", "New York", "NY", "54433");
+
+            Repository.Save<Order>(order);
+
+            var fromDB = Repository.FindById<Order>(order.Id);
+            Assert.Equal(order.ShippingAddress.Id, fromDB.ShippingAddress.Id);
+        }
+
+        [Fact]
         public void Can_save_line_item_to_order_with_persistance_model()
         {
             var order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextSecond));

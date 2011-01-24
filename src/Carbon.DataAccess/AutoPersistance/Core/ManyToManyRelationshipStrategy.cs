@@ -87,6 +87,13 @@ namespace Carbon.Repository.AutoPersistance.Core
             bool isObjectArray = property.FullName.Contains("[]");
             bool isGenericList = property.IsGenericType;
 
+            // exclude the conversion of ValueType? to Nullable<ValueType>
+            // which is interpreted as a collection:
+            if(property.FullName.StartsWith(typeof(Nullable<>).FullName))
+            {
+                return modelType;
+            }
+
             if (isObjectArray)
             {
                 object typ = property.Assembly.CreateInstance(property.FullName);
