@@ -93,7 +93,7 @@ namespace Carbon.DataAccess.Tests.Repository
             }
 
             var products = new FindAllProductsLessThan10DollarsQuery(_repository.FindAll()).Find();
-
+               
             Assert.NotEqual(0, products.Count);
             Assert.Equal(7, products.Count);
         }

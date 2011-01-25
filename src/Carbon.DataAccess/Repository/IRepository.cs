@@ -35,7 +35,7 @@ namespace Carbon.Repository.Repository
         /// <summary>
         /// This will find a single instance of a type from the <seealso cref="IQuerySpecification{T}">query specification</seealso>.
         /// </summary>
-        /// <param name="specification">The query specification to use for filtering data.</typeparam>
+        /// <param name="specification">The query specification to use for filtering data.</param>
         /// <returns></returns>
         T FindOne(AbstractQuerySpecification<T> specification);
 
@@ -48,7 +48,7 @@ namespace Carbon.Repository.Repository
         /// <summary>
         /// This will return the entire listing of entities based on type with a filter applied.
         /// </summary>
-        /// <param name="specification">The query specification to use for filtering data.</typeparam>
+        /// <param name="specification">The query specification to use for filtering data.</param>
         /// <returns></returns>
         IList<T> FindAll(AbstractQuerySpecification<T> specification);
 
@@ -72,7 +72,7 @@ namespace Carbon.Repository.Repository
         /// <summary>
         /// This will return a paginated result based on the query passed.
         /// </summary>
-        /// <param name="specification">The query specification to use for filtering data.</typeparam>
+        /// <param name="specification">The query specification to use for filtering data.</param>
         /// <param name="page">Current page number</param>
         /// <param name="pageSize">Number of records to return/display at one time.</param>
         /// <returns></returns>

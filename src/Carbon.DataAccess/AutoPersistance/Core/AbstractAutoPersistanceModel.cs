@@ -75,7 +75,8 @@ namespace Carbon.Repository.AutoPersistance.Core
                 model.Build();
                 m_model = model;
                 m_sessionFactory = null;
-                System.Diagnostics.Debug.WriteLine("Entity Mapping: " + model.GetMaps());
+                var maps = model.GetMaps();
+                System.Diagnostics.Debug.WriteLine("Entity Mapping: \r" + AutoPersistanceModel.FormatEntityHBMContents(maps));
             }
             catch (Exception exc)
             {

@@ -17,7 +17,7 @@ namespace Carbon.DataAccess.Tests.Domain
         private OrderPriorityEnums _priority; 
 
         // for NHibernate
-        private OrderPriority()
+        protected OrderPriority()
         {}
 
         public OrderPriority(OrderPriorityEnums priority)
@@ -25,12 +25,12 @@ namespace Carbon.DataAccess.Tests.Domain
             _priority = priority;
         }
 
-        public int Id
+        public virtual int Id
         {
             get { return _id; }
         }
 
-        public OrderPriorityEnums Priority 
+        public virtual OrderPriorityEnums Priority 
         {
             get {return _priority;}
         }

@@ -120,13 +120,13 @@ namespace Carbon.DataAccess.Tests.Domain
                 _orderlines.Add(lineItem);
         }
 
-        public void ChangeHomeAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
+        public virtual void  ChangeHomeAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
         {
             this.HomeAddress = new HomeAddress();
             this.HomeAddress.ChangeAddress(addressLine1, addressLine2, city, state, postalCode);
         }
 
-         public void ChangeShippingAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
+        public virtual void ChangeShippingAddress(string addressLine1, string addressLine2, string city, string state, string postalCode)
         {
             this.ShippingAddress = new ShippingAddress();
             this.ShippingAddress.ChangeAddress(addressLine1, addressLine2, city, state, postalCode);

@@ -17,7 +17,7 @@ namespace Carbon.DataAccess.Tests.Domain
         private OrderStatusEnum _status;
 
         // for NHibernate:
-        private OrderStatus()
+        protected OrderStatus()
         { }
 
         public OrderStatus(OrderStatusEnum status)
@@ -25,12 +25,12 @@ namespace Carbon.DataAccess.Tests.Domain
             _status = status;
         }
 
-        public int Id
+        public virtual int Id
         {
             get { return _id; }
         }
 
-        public OrderStatusEnum Status
+        public virtual OrderStatusEnum Status
         {
             get { return _status; }
         }

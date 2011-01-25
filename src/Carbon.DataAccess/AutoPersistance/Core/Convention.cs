@@ -16,6 +16,7 @@ namespace Carbon.Repository.AutoPersistance.Core
         private MemberAccessConvention<Convention> _memberAccessConvention = null;
         private ForeignKeyNamingConvention<Convention> _foreignKey = null;
         private ManyToManyNamingConvention<Convention> _manyToManyNamingConvention = null;
+        private bool _canUseLazyLoading = true;
 
         /// <summary>
         /// Read-only. Indicator to whether the table names will be pluralized in the repository.
@@ -80,6 +81,18 @@ namespace Carbon.Repository.AutoPersistance.Core
             private set;
         }
 
+        /// <summary>
+        /// Gets the flag indicating whether or not to use 
+        /// lazy loading on the entities (default = true)
+        /// </summary>
+        public bool CanUseLazyLoading
+        {
+            get
+            {
+                return _canUseLazyLoading;
+            }
+        }
+
         public Convention()
         {
             _primaryKey = new PrimaryKeyColumnConvention<Convention>(this);
@@ -103,10 +116,20 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// Sets the custom naming strategy to use for the columns in the database as a result of the auto-mapping.
         /// </summary>
         /// <param name="propertyNamingStrategy"></param>
-        public void SetColumnNamingStrategy(IColumnNamingStrategy propertyNamingStrategy)
+        public Convention SetColumnNamingStrategy(IColumnNamingStrategy propertyNamingStrategy)
         {
             this.PropertyNamingStrategy = propertyNamingStrategy;
+            return this;
         }
 
+        /// <summary>
+        /// Sets the flag indicating that all entities mappings generated will not employ lazy loading.
+        /// </summary>
+        /// <returns></returns>
+        public Convention DoNotUseLazyLoading()
+        {
+            _canUseLazyLoading = false;
+            return this;
+        }
     }
 }

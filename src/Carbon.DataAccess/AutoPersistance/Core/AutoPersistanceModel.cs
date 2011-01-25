@@ -219,7 +219,7 @@ namespace Carbon.Repository.AutoPersistance.Core
                 documents.Add(map);
 
                 WriteEntityMapToFileFor(entity, map);
-
+              
                 if (_renderMappingPerEntity)
                     combine += map;
 
@@ -341,7 +341,7 @@ namespace Carbon.Repository.AutoPersistance.Core
             document.Append(ORMUtils.BuildAttribute("assembly", entity.Assembly.GetName().Name));
             document.Append(ORMUtils.BuildAttribute("namespace", entity.Namespace));
             document.Append("\n").Append("\t");
-            document.Append(ORMUtils.BuildAttribute("default-lazy", "false"));
+            document.Append(ORMUtils.BuildAttribute("default-lazy", m_convention.CanUseLazyLoading.ToString().ToLower()));
             document.Append(">");
             document.Append("\r\n\r\n");
             document.Append(entityDefinition);
@@ -351,15 +351,19 @@ namespace Carbon.Repository.AutoPersistance.Core
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(document.ToString());
 
-            return xmlDoc.OuterXml;
+            string shell = FormatEntityHBMContents(xmlDoc.OuterXml);
+
+            return shell;
         }
 
-        private void WriteEntityMapToFileFor(Type entity, string contents)
+        private string  WriteEntityMapToFileFor(Type entity, string contents)
         {
+            string document = string.Empty;
+
             string fileName = "{0}.hbm.xml";
 
             if (string.IsNullOrEmpty(m_mappingsFilePath))
-                return;
+                return document;
 
             if (!Directory.Exists(m_mappingsFilePath))
                 throw new ArgumentException("The directory [" + m_mappingsFilePath + "] was not found to place the mapping files.");
@@ -371,7 +375,10 @@ namespace Carbon.Repository.AutoPersistance.Core
                 File.Delete(file);
                 using (FileStream fs = new FileStream(file, FileMode.OpenOrCreate))
                 {
-                    byte[] data = ASCIIEncoding.ASCII.GetBytes(BuildNHibernateShell(entity, contents));
+                    var nhibernateDocument = BuildNHibernateShell(entity, contents);
+                    document = nhibernateDocument;
+
+                    byte[] data = ASCIIEncoding.ASCII.GetBytes(nhibernateDocument);
                     fs.Write(data, 0, data.Length);
                 }
 
@@ -381,6 +388,21 @@ namespace Carbon.Repository.AutoPersistance.Core
                 throw;
             }
 
+            return document;
+        }
+
+        public static string FormatEntityHBMContents(string entityHBMContents)
+        {
+            // properly indent the xml contents:
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(entityHBMContents);
+
+            StringWriter sw = new StringWriter();
+            XmlTextWriter xtw = new XmlTextWriter(sw);
+            xtw.Formatting = Formatting.Indented;
+            doc.WriteTo(xtw);
+
+            return sw.ToString();
         }
 
         private Convention DefaultConvention()

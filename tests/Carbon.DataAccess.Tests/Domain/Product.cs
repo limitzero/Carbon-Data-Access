@@ -25,6 +25,14 @@ namespace Carbon.DataAccess.Tests.Domain
             _price = price;
         }
 
+        public virtual int Id
+        {
+            get
+            {
+                return _id;
+            }
+
+        }
 
         public virtual DateTime? CreatedOn
         {
@@ -68,13 +76,6 @@ namespace Carbon.DataAccess.Tests.Domain
             }
         }
 
-        public virtual int Id
-        {
-            get
-            {
-                return _id;
-            }
 
-        }
     }
 }

@@ -1,10 +1,10 @@
 using Carbon.DataAccess.Tests.Domain;
 using Carbon.Repository.ForTesting;
+using NHibernate;
 using Xunit;
 
 namespace Carbon.DataAccess.Tests.AutoPersistance
 {
-
     public class PersistanceWithBaseClassTests : BaseAutoPersistanceTestFixture
     {
         public PersistanceWithBaseClassTests()
@@ -67,7 +67,7 @@ namespace Carbon.DataAccess.Tests.AutoPersistance
             order.AddItem(new OrderLine(new Product("Windex", "Glass Cleaner", 8.95M), 4));
 
             Repository.Save<Order>(order);
-
+            
             var fromDB = Repository.FindById<Order>(order.Id);
             Assert.Equal(order.Id, fromDB.Id); // "The identifier for the order could not be found."
             Assert.Equal(1, fromDB.Orderlines.Count); // "The items for the order could not be retrieved."

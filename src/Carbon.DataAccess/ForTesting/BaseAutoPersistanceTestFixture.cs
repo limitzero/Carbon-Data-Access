@@ -71,7 +71,7 @@ namespace Carbon.Repository.ForTesting
     ///        }
     /// }
     /// </example>
-    public abstract class BaseAutoPersistanceTestFixture
+    public abstract class BaseAutoPersistanceTestFixture : IDisposable
     {
 
         #region -- private variables --
@@ -79,6 +79,13 @@ namespace Carbon.Repository.ForTesting
         private static ISessionFactory m_sessionFactory = null;
         private static AutoPersistanceModel m_model = null;
         #endregion
+
+        public void Dispose()
+        {
+            m_strategy = null;
+            m_sessionFactory = null;
+            m_model = null;
+        }
 
         /// <summary>
         /// Sets the persistance strategy to use while testing interaction with the persistance store.
@@ -137,7 +144,10 @@ namespace Carbon.Repository.ForTesting
                 model.Build();
                 m_model = model;
                 m_sessionFactory = null;
-                System.Diagnostics.Debug.WriteLine("Entity Mapping: " + model.GetMaps());
+  
+                var maps = model.GetMaps();
+                System.Diagnostics.Debug.WriteLine("Entity Mapping(s): \r" + AutoPersistanceModel.FormatEntityHBMContents(maps));
+
             }
             catch (Exception exc)
             {
@@ -216,9 +226,8 @@ namespace Carbon.Repository.ForTesting
         /// <summary>
         /// This is the data persistance and retreival object for testing interactions via NHibernate (for testing only)
         /// </summary>
-        public class Repository
+        public class Repository : IDisposable
         {
-
             #region -- local variables --
             private static object[] m_saveOperations = new object[] { };
             private static object[] m_deleteOperations = new object[] { };
@@ -226,6 +235,12 @@ namespace Carbon.Repository.ForTesting
 
             static Repository()
             { }
+
+            public void Dispose()
+            {
+                m_saveOperations = null;
+                m_deleteOperations = null; 
+            }
 
             /// <summary>
             /// Retrieves an object based on type as indicated by 
