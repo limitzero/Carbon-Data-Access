@@ -114,7 +114,13 @@ namespace Carbon.DataAccess.Tests.Domain
 
         }
 
-        public  virtual void AddItem(OrderLine lineItem)
+
+		public virtual OrderLine CreateOrderLine()
+		{
+			return new OrderLine(this);
+		}
+
+    	public virtual void AddLine(OrderLine lineItem)
         {
             if (!_orderlines.Contains(lineItem))
                 _orderlines.Add(lineItem);

@@ -18,7 +18,7 @@ namespace Carbon.DataAccess.Tests.AutoPersistance
         public void Can_scan_for_entities_for_model()
         {
             m_model.Build();
-            Assert.Equal(6, m_model.Entities.Count); //"The HomeAddress sub-component is not a stand-alone entity since it is inherited from Address
+            Assert.Equal(7, m_model.Entities.Count); //"The HomeAddress sub-component is not a stand-alone entity since it is inherited from Address
         }
 
         [Fact]

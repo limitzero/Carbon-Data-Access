@@ -1,123 +1,147 @@
 using Carbon.DataAccess.Tests.Domain;
 using Carbon.Repository.AutoPersistance.Core;
+using NHibernate.Criterion;
+using NHibernate.SqlCommand;
 using Xunit;
+using Order = Carbon.DataAccess.Tests.Domain.Order;
 
 namespace Carbon.DataAccess.Tests.AutoPersistance
 {
 
-    public class AutoPersistanceModelPersistanceTests
-    {
-        private AutoPersistanceModel m_model;
+	public class AutoPersistanceModelPersistanceTests
+	{
+		private AutoPersistanceModel m_model;
 
-        public AutoPersistanceModelPersistanceTests()
-        {
-            m_model = Configurator.GetModel();
-            m_model.CacheMapping();
+		public AutoPersistanceModelPersistanceTests()
+		{
+			m_model = Configurator.GetModel();
+			m_model.CacheMapping();
 
-            m_model.ConfigurationFile(@"hibernate.cfg.xml");
+			m_model.ConfigurationFile(@"hibernate.cfg.xml");
 
-            m_model.Build();
-            m_model.CreateSchema();
-        }
+			m_model.Build();
+			m_model.CreateSchema();
+		}
 
-        [Fact]
-        public void Can_save_product_with_persistance_model()
-        {
-            using (var session = m_model.CurrentSessionFactory.OpenSession())
-            using (var txn = session.BeginTransaction())
-            {
-                try
-                {
-                    var product = new Product("Windex", "Window/Tile Cleaner", 24.95M);
-                    session.Save(product);
-                    txn.Commit();
+		[Fact]
+		public void Can_save_product_with_persistance_model()
+		{
+			using (var session = m_model.CurrentSessionFactory.OpenSession())
+			using (var txn = session.BeginTransaction())
+			{
+				try
+				{
+					var product = new Product(null);
+					product.ChangeProduct("Windex", "Window/Tile Cleaner", 24.95M);
+					session.Save(product);
+					txn.Commit();
 
-                    var fromDB = session.Get<Product>(product.Id);
-                    Assert.Equal(product.Id, fromDB.Id);
-                }
-                catch (System.Exception)
-                {
-                    txn.Rollback();
-                    throw;
-                }
-            }
+					var fromDB = session.Get<Product>(product.Id);
+					Assert.Equal(product.Id, fromDB.Id);
+				}
+				catch (System.Exception)
+				{
+					txn.Rollback();
+					throw;
+				}
+			}
 
-        }
+		}
 
-        [Fact]
-        public void Can_save_order_with_persistance_model()
-        {
-            using (var session = m_model.CurrentSessionFactory.OpenSession())
-            using (var txn = session.BeginTransaction())
-            {
-                try
-                {
-                    var order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextDayAir));
-                    session.Save(order);
-                    txn.Commit();
+		[Fact]
+		public void Can_save_order_with_persistance_model()
+		{
+			using (var session = m_model.CurrentSessionFactory.OpenSession())
+			using (var txn = session.BeginTransaction())
+			{
+				try
+				{
+					var order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextDayAir));
+					session.Save(order);
+					txn.Commit();
 
-                    var fromDB = session.Get<Order>(order.Id);
-                    Assert.Equal(order.Id, fromDB.Id);
+					var fromDB = session.Get<Order>(order.Id);
+					Assert.Equal(order.Id, fromDB.Id);
 
-                }
-                catch (System.Exception)
-                {
-                    txn.Rollback();
-                    throw;
-                }
-            }
-        }
+				}
+				catch (System.Exception)
+				{
+					txn.Rollback();
+					throw;
+				}
+			}
+		}
 
-        [Fact]
-        public void Can_save_line_item_to_order_with_persistance_model()
-        {
-            using (var session = m_model.CurrentSessionFactory.OpenSession())
-            using (var txn = session.BeginTransaction())
-            {
-                try
-                {
-                    var order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextSecond));
-                    order.AddItem(new OrderLine(new Product("Windex", "Glass Cleaner", 8.95M), 4));
+		[Fact]
+		public void Can_save_line_item_to_order_with_persistance_model()
+		{
+			Order order;
 
-                    session.Save(order);
-                    txn.Commit();
+			using (var session = m_model.CurrentSessionFactory.OpenSession())
+			using (var txn = session.BeginTransaction())
+			{
+				try
+				{
+					order = new Order(new OrderStatus(OrderStatusEnum.Created), new OrderPriority(OrderPriorityEnums.NextSecond));
+					var orderline = order.CreateOrderLine();
 
-                    var fromDB = session.Get<Order>(order.Id);
-                    Assert.Equal(order.Id, fromDB.Id);  //"The identifier for the order could not be found.");
-                    Assert.Equal(1, fromDB.Orderlines.Count); // "The items for the order could not be retrieved.");
-                }
-                catch (System.Exception)
-                {
-                    txn.Rollback();
-                    throw;
-                }
+					var product = orderline.CreateProduct();
+					product.ChangeProduct("Windex", "Window/Tile Cleaner", 24.95M);
+					orderline.SaveProduct(product, 4);
+					order.AddLine(orderline);
 
-            }
-        }
+					session.Save(order);
+					txn.Commit();
 
-        [Fact]
-        public void Can_save_orderline_with_persistance_model()
-        {
-            using (var session = m_model.CurrentSessionFactory.OpenSession())
-            using(var txn = session.BeginTransaction())
-            {
-                try
-                {
-                    var item = new OrderLine(new Product("Windex", "Glass Cleaner", 8.95M), 4);
-                    session.Save(item);
-                    txn.Commit();
+					var fromDB = session.Get<Order>(order.Id);
 
-                    var fromDB = session.Get<OrderLine>(item.Id);
-                    Assert.Equal(item.Id, fromDB.Id); //"The identifier for the order line could not be found.");
-                }
-                catch (System.Exception)
-                {
-                    txn.Rollback();
-                    throw;
-                }
+					var orderlinesCriteria = DetachedCriteria.For<OrderLine>()
+													 .CreateCriteria("Order", JoinType.InnerJoin)
+													 .Add(Restrictions.Eq("Id", fromDB.Id));
 
-            }
-        }
+					var orderlines = orderlinesCriteria.GetExecutableCriteria(session).List<OrderLine>();
 
-    }
+					Assert.Equal(order.Id, fromDB.Id);  //"The identifier for the order could not be found.");
+					Assert.Equal(1, orderlines.Count); // "The items for the order could not be retrieved.");
+
+				}
+				catch (System.Exception)
+				{
+					txn.Rollback();
+					throw;
+				}
+
+			}
+
+		}
+
+		[Fact]
+		public void Can_save_orderline_with_persistance_model()
+		{
+			using (var session = m_model.CurrentSessionFactory.OpenSession())
+			using (var txn = session.BeginTransaction())
+			{
+				try
+				{
+					var item = new OrderLine(null);
+					var product = item.CreateProduct();
+					product.ChangeProduct("Windex", "Glass Cleaner", 8.95M);
+					item.SaveProduct(product, 1);
+
+					session.Save(item);
+					txn.Commit();
+
+					var fromDB = session.Get<OrderLine>(item.Id);
+					Assert.Equal(item.Id, fromDB.Id); //"The identifier for the order line could not be found.");
+				}
+				catch (System.Exception)
+				{
+					txn.Rollback();
+					throw;
+				}
+
+			}
+		}
+
+	}
 }

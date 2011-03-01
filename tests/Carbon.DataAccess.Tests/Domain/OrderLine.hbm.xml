@@ -6,7 +6,7 @@
     </id>
     <!-- properties for entity 'OrderLine' -->
     <property name="Quantity" column="Quantity" type="Int32" length="200" access="nosetter.lowercase-underscore" />
-    <!-- many "OrderLine" are associated with one instance of a "Product" -->
-    <many-to-one name="Product" class="Product" cascade="all" access="nosetter.lowercase-underscore" column="productID" foreign-key="fk_Product_has_instances_of_OrderLine" fetch="join" not-found="ignore" />
+    <!-- many "OrderLine" are associated with one instance of a "Order" -->
+    <many-to-one name="Order" class="Order" cascade="all" access="nosetter.lowercase-underscore" column="orderID" foreign-key="fk_Order_has_instances_of_OrderLine" fetch="join" not-found="ignore" />
   </class>
 </hibernate-mapping>

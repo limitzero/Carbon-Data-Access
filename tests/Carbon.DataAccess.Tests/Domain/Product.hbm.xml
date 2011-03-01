@@ -9,5 +9,7 @@
     <property name="Description" column="Description" type="String" length="200" access="nosetter.lowercase-underscore" />
     <property name="Name" column="Name" type="String" length="200" access="nosetter.lowercase-underscore" />
     <property name="Price" column="Price" type="System.Decimal" not-null="false" length="200" access="nosetter.lowercase-underscore" />
+    <!-- many "Product" are associated with one instance of a "OrderLine" -->
+    <many-to-one name="OrderLine" class="OrderLine" cascade="all" access="nosetter.lowercase-underscore" column="orderlineID" foreign-key="fk_OrderLine_has_instances_of_Product" fetch="join" not-found="ignore" />
   </class>
 </hibernate-mapping>

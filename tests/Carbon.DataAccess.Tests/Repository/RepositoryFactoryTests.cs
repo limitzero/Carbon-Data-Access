@@ -39,7 +39,8 @@ namespace Carbon.DataAccess.Tests.Repository
                 var repository = _factory.CreateFor<Product>(_model.GetCurrentConfigurationFile());
                 Assert.True(typeof(IRepository<Product>).IsAssignableFrom(repository.GetType()));
 
-                var product = new Product("Windex", "Window/Tile Cleaner", 24.95M);
+            	var product = new Product(null);
+			    product.ChangeProduct("Windex", "Window/Tile Cleaner", 24.95M);
 
                 // here is the error, no mapping assembly is defined when using the 
                 // auto-persistance configuration and this will cause NHibernate 
@@ -62,7 +63,9 @@ namespace Carbon.DataAccess.Tests.Repository
             var factory = new NHibernateAutoPersistanceRepositoryFactory(_model);
             var repository = factory.CreateFor<Product>();
 
-            var product = new Product("Windex", "Window/Tile Cleaner", 24.95M);
+			var product = new Product(null);
+			product.ChangeProduct("Windex", "Window/Tile Cleaner", 24.95M);
+
             repository.Persist(PersistanceAction.Save, product);
 
             Assert.Equal(1, product.Id);
