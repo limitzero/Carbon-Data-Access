@@ -96,7 +96,7 @@ namespace Carbon.Repository.AutoPersistance.Core
             results.Append("\r\n");
             results.Append(string.Format("<many-to-one name=\"{0}\" class=\"{1}\" cascade=\"all\" access=\"{2}\"  column=\"{3}\" foreign-key=\"{4}\" fetch=\"join\" not-found=\"ignore\" />",
                                          parentProperty.Name,
-                                         parentEntity.Name,
+										 RelationshipDefinition.CreateQualifiedName(parentEntity),
                                          _convention.MemberAccess.Strategy,
                                          base.BuildPrimaryKeyColumnName(_convention, parentEntity),
                                          base.BuildForeignKeyName(_convention, parentEntity, _entity)));

@@ -162,8 +162,11 @@ namespace Carbon.Repository.AutoPersistance.Core
 
                 // element: one-to-many
                 builder.Append("<one-to-many");
+
                 //attribute:  class
-                builder.Append(BuildAttribute("class", childEntity.Name));
+                //builder.Append(BuildAttribute("class", childEntity.Name));
+				builder.Append(BuildAttribute("class", RelationshipDefinition.CreateQualifiedName(childEntity)));
+
                 //attribute:  column
                 //builder.Append(BuildAttribute("column", BuildPrimaryKeyColumnName(convention, definition.ReferencedEntity)));
                 builder.Append("/>");
@@ -238,8 +241,11 @@ namespace Carbon.Repository.AutoPersistance.Core
 
                 // element: many-to-many
                 builder.Append("<many-to-many");
+
                 //attribute:  class
-                builder.Append(BuildAttribute("class", childEntity.Name));
+                //builder.Append(BuildAttribute("class", childEntity.Name));
+				builder.Append(BuildAttribute("class", RelationshipDefinition.CreateQualifiedName(childEntity)));
+
                 //attribute:  column
                 builder.Append(BuildAttribute("column", BuildPrimaryKeyColumnName(m_convention, childEntity)));
                 builder.Append("/>");

@@ -489,7 +489,7 @@ namespace Carbon.Repository.AutoPersistance.Core
                         // element: one-to-many
                         builder.Append("<one-to-many");
                         //attribute:  class
-                        builder.Append(BuildAttribute("class", definition.ReferencedEntity.Name));
+                        builder.Append(BuildAttribute("class", definition.QualifiedName));
                         //attribute:  column
                         //builder.Append(BuildAttribute("column", BuildPrimaryKeyColumnName(convention, definition.ReferencedEntity)));
                         builder.Append("/>");
@@ -602,7 +602,9 @@ namespace Carbon.Repository.AutoPersistance.Core
                         // element: many-to-many
                         builder.Append("<many-to-many");
                         //attribute:  class
-                        builder.Append(BuildAttribute("class", definition.ReferencedEntity.Name));
+                        //builder.Append(BuildAttribute("class", definition.ReferencedEntity.Name));
+						builder.Append(BuildAttribute("class", definition.QualifiedName));
+
                         //attribute:  column
                         builder.Append(BuildAttribute("column", BuildPrimaryKeyColumnName(convention, definition.ReferencedEntity)));
                         builder.Append("/>");
@@ -1240,7 +1242,8 @@ namespace Carbon.Repository.AutoPersistance.Core
 
     public class RelationshipDefinition
     {
-      
+    	private string _qualifiedName;
+
         public RelationshipDefinition()
         {
 
@@ -1285,8 +1288,27 @@ namespace Carbon.Repository.AutoPersistance.Core
         public Type ReferencedEntity
         {
             get { return _referencedentity; }
-            set { _referencedentity = value; }
+            set
+			{
+				_referencedentity = value;
+				this.MakeQualifiedName(value);
+			}
         }
 
+    	public string QualifiedName
+    	{
+			get { return _qualifiedName; }
+    	}
+
+		private string MakeQualifiedName(Type entity)
+		{
+			return CreateQualifiedName(entity);
+		}
+
+		public static string CreateQualifiedName(Type entity)
+		{
+			var parts = entity.AssemblyQualifiedName.Split(new char[]{','},StringSplitOptions.RemoveEmptyEntries);
+			return string.Concat(entity.FullName, ", ", parts[1].Trim());
+		}
     }
 }
