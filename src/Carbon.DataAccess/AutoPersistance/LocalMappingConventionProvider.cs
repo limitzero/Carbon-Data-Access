@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Carbon.Repository.AutoPersistance.Core;
+using NHibernate.Carbon.AutoPersistance.Core;
 
-namespace Carbon.Repository.AutoPersistance
+namespace NHibernate.Carbon.AutoPersistance
 {
     /// <summary>
     /// This can be used as an example of the conventions that are enacted over the domain model:
@@ -12,9 +9,9 @@ namespace Carbon.Repository.AutoPersistance
     {
         #region IConventionProvider Members
 
-        public Convention GetConventions()
+        public ModelConvention GetConventions()
         {
-            var convention = new Convention();
+            var convention = new ModelConvention();
             convention.PluralizeTableNames();
             convention.MemberAccess.NoSetterLowerCaseUnderscore();
 

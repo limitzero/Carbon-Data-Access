@@ -1,6 +1,4 @@
-using Carbon.Repository.AutoPersistance.Core;
-
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Contract for creating repositories based on type.

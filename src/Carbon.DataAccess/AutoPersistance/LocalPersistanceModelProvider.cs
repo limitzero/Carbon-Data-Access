@@ -1,8 +1,8 @@
 using System;
-using Carbon.Repository.AutoPersistance.Core;
-using Carbon.Repository.AutoPersistance.Persistance.Strategies;
+using NHibernate.Carbon.AutoPersistance.Core;
+using NHibernate.Carbon.AutoPersistance.Persistance.Strategies;
 
-namespace Carbon.Repository.AutoPersistance
+namespace NHibernate.Carbon.AutoPersistance
 {
     /// <summary>
     /// This is an example of the persistance model fixture that is 

@@ -11,6 +11,7 @@ properties {
   $tools_dir = "$base_dir\tools"
   $release_dir = "$base_dir\release"
 } 
+include .\build_ext.ps1
 
 #-------------------------------------------------------------------------------  
 # entry task to start the build script
@@ -24,7 +25,6 @@ task clean {
   remove-item -force -recurse $buildartifacts_dir -ErrorAction SilentlyContinue
   remove-item -force -recurse $release_dir -ErrorAction SilentlyContinue 
 } 
-
 #-------------------------------------------------------------------------------  
 # initializes all of the directories and other objects in preparation for the 
 # build process

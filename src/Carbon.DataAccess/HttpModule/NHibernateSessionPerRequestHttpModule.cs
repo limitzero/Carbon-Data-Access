@@ -2,9 +2,9 @@
 using System.Configuration;
 using System.IO;
 using System.Web;
-using Carbon.Repository.Repository;
+using NHibernate.Carbon.Repository;
 
-namespace Carbon.Repository.HttpModule
+namespace NHibernate.Carbon.HttpModule
 {
     public class NHibernateSessionPerRequestHttpModule : IHttpModule
     {

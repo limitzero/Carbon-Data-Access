@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="map enums to tables for lookup purposes">
+    <Position X="8.577" Y="3.982" Height="0.498" Width="1.763" />
+  </Comment>
+  <Comment CommentText="ordered line item has a product">
+    <Position X="5.453" Y="7.376" Height="0.498" Width="1.763" />
+  </Comment>
+  <Comment CommentText="order has zero or more line items">
+    <Position X="3.163" Y="5.936" Height="0.498" Width="1.763" />
+  </Comment>
+  <Comment CommentText="homeaddress and shipping address &quot;is a(n)&quot; address">
+    <Position X="2.154" Y="1.513" Height="0.498" Width="1.763" />
+  </Comment>
+  <Comment CommentText="order has a home address and shipping address">
+    <Position X="0.5" Y="5.17" Height="0.498" Width="1.763" />
+  </Comment>
+  <Class Name="Carbon.DataAccess.Tests.Domain.Address" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEAAAAAAAAAAIIAAECAAAAAAAAAAAAAAABEICAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.HomeAddress" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAABAAAAAAAIAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\HomeAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.Order" Collapsed="true">
+    <Position X="1.5" Y="4.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>QcgCAAAEUAAAAAAEAQBAAgAAAggACAAAAAAAEABAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HomeAddress" />
+      <Property Name="ShippingAddress" />
+      <Property Name="Status" />
+      <Property Name="Priority" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orderlines" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.OrderLine" Collapsed="true">
+    <Position X="7.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAECAAAiAAAAAAABAABAAAAAAAAAAAAAAIAAgAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\OrderLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.OrderPriority" Collapsed="true">
+    <Position X="6.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAAAAAAAAEAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\OrderPriority.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Priority" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.OrderStatus" Collapsed="true">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAAAEAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\OrderStatus.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.Product" Collapsed="true">
+    <Position X="4" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IgACIAAAAQAgIAAEAABAAAQAgCACAAAgAAAgAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.ShippingAddress" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\ShippingAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.Customer">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECIAAAAAAAAAAAAABAAAQAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Name" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Carbon.DataAccess.Tests.Domain.Name" Collapsed="true">
+    <Position X="8.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAYAAAAAAAAAAAAAAEAAAQCASAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\Name.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Carbon.DataAccess.Tests.Domain.OrderPriorityEnums" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAIAAAAAEAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\OrderPriority.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Carbon.DataAccess.Tests.Domain.OrderStatusEnum" Collapsed="true">
+    <Position X="9" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAQBAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\OnlineShopping\OrderStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

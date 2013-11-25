@@ -1,31 +1,30 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Carbon.DataAccess.Tests.Domain;
-using Carbon.Repository.ForTesting;
-using Carbon.Repository.Repository;
+using NHibernate.Carbon.ForTesting;
+using NHibernate.Carbon.Repository;
+using NHibernate.Carbon.Tests.Domain.OnlineShopping;
 using NHibernate.Criterion;
 using Xunit;
 
-namespace Carbon.DataAccess.Tests.Repository
+namespace NHibernate.Carbon.Tests.Repository
 {
 	public class RepositoryTests : BaseAutoPersistanceTestFixture
 	{
-		private IRepository<Product> _repository = null;
+		private readonly IRepository<Product> _repository = null;
 
 		public RepositoryTests()
 		{
-			var model = Configurator.GetModel();
+			var model = TestConfigurator.GetModel();
 			model.Build();
 			model.CreateSchema();
 
-			_repository = new NHibernateRepository<Product>(model.CurrentSessionFactory.OpenSession());
+			_repository = model.GetRepositoryFor<Product>();
 		}
 
 		[Fact]
 		public void Can_save_product_with_repository()
 		{
-			var product = new Product(null);
+			var product = new Product();
 			product.ChangeProduct("Windex", "Window/Tile Cleaner", 24.95M);
 			_repository.Persist(PersistanceAction.Save, product);
 
@@ -36,13 +35,13 @@ namespace Carbon.DataAccess.Tests.Repository
 		[Fact]
 		public void Can_save_multiple_products_with_repository_and_return_paginated_list()
 		{
-			var pageSize = 5;
-			var totalRecords = pageSize * 2;
+			int pageSize = 5;
+			int totalRecords = pageSize*2;
 
-			for (var index = 0; index < totalRecords; index++)
+			for (int index = 0; index < totalRecords; index++)
 			{
-				var product = new Product(null);
-				product.ChangeProduct(index.ToString(), index.ToString(), index * 13.50M);
+				var product = new Product();
+				product.ChangeProduct(index.ToString(), index.ToString(), index*13.50M);
 				_repository.Persist(PersistanceAction.Save, product);
 			}
 
@@ -67,13 +66,13 @@ namespace Carbon.DataAccess.Tests.Repository
 		[Fact]
 		public void Can_pass_in_custom_query_object_for_filtering_results_and_use_nhibernate_criteria_object_for_querying()
 		{
-			var pageSize = 5;
-			var totalRecords = pageSize * 2;
+			int pageSize = 5;
+			int totalRecords = pageSize*2;
 
-			for (var index = 0; index < totalRecords; index++)
+			for (int index = 0; index < totalRecords; index++)
 			{
-				var product = new Product(null);
-				product.ChangeProduct(index.ToString(), index.ToString(), index * 1.50M);
+				var product = new Product();
+				product.ChangeProduct(index.ToString(), index.ToString(), index*1.50M);
 				_repository.Persist(PersistanceAction.Save, product);
 			}
 
@@ -86,31 +85,30 @@ namespace Carbon.DataAccess.Tests.Repository
 		[Fact]
 		public void Can_pass_in_custom_query_object_for_filtering_results_and_use_linq_with_custom_collection_for_querying()
 		{
-			var pageSize = 5;
-			var totalRecords = pageSize * 2;
+			int pageSize = 5;
+			int totalRecords = pageSize*2;
 
-			for (var index = 0; index < totalRecords; index++)
+			for (int index = 0; index < totalRecords; index++)
 			{
-				var product = new Product(null);
-				product.ChangeProduct(index.ToString(), index.ToString(), index * 1.50M);
+				var product = new Product();
+				product.ChangeProduct(index.ToString(), index.ToString(), index*1.50M);
 				_repository.Persist(PersistanceAction.Save, product);
 			}
 
+			// this is the disconnected state for querying a collection of objects that may or may not have 
+			// come from the underlying data store. usefull in unit testing the query object:
 			var products = new FindAllProductsLessThan10DollarsQuery(_repository.FindAll()).Find();
 
 			Assert.NotEqual(0, products.Count);
 			Assert.Equal(7, products.Count);
 		}
-
 	}
 
 	public class FindAllProductsLessThan10DollarsQuery : AbstractQuerySpecification<Product>
 	{
-
 		public FindAllProductsLessThan10DollarsQuery()
 			: this(null)
 		{
-
 		}
 
 		public FindAllProductsLessThan10DollarsQuery(IList<Product> products)
@@ -135,6 +133,5 @@ namespace Carbon.DataAccess.Tests.Repository
 			var results = criteria.GetExecutableCriteria(this.GetSession()).List<Product>();
 			return results;
 		}
-
 	}
 }

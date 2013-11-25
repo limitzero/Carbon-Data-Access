@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     public class PaginatedResult<T> : List<T> where T : class
     {
@@ -26,8 +25,6 @@ namespace Carbon.Repository.Repository
             TotalPages = (int)Math.Ceiling(TotalCount / (double)PageSize);
 
             this.BuildPage(source);
-
-            //this.AddRange(source.Skip(PageIndex * PageSize).Take(PageSize));
         }
 
         public bool HasPreviousPage

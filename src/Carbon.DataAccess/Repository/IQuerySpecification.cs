@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using NHibernate;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Contract for implementing in-memory querying against a collection of items.

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NHibernate.Carbon</RootNamespace>
+    <AssemblyName>NHibernate.Carbon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/Carbon.Repository/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\..\lib\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\..\lib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoPersistance\Builders\For\Collections\ManyToOneGenericListCollectionBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\Components\ComponentBuilder.cs" />
+    <None Include="AutoPersistance\Builders\PrimaryKeyBuilder.cs.orig" />
+    <Compile Include="AutoPersistance\Builders\EntityBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\ForeignKeys\ForeignKeyNameBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\IBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\IComponentBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildEntityDefinition.cs" />
+    <Compile Include="AutoPersistance\Builders\IForeignKeyNameBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\IPrimaryKeyBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\IPrimaryKeyNameBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildProperty.cs" />
+    <Compile Include="AutoPersistance\Builders\ISubclassBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\ICanBuildVersionDeclaration.cs" />
+    <Compile Include="AutoPersistance\Conventions\IIGenerationConventionInterceptor.cs" />
+    <None Include="AutoPersistance\Core\ManyToOneRelationshipStrategy.cs.orig" />
+    <Compile Include="AutoPersistance\Builders\For\Collections\ICollectionBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\Collections\ManyToOneGenericSetCollectionBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\Collections\ManyToOneGenericBagCollectionBuilder.cs" />
+    <None Include="AutoPersistance\Core\AutoPersistanceModel.cs.orig" />
+    <Compile Include="AutoPersistance\OptimizationAttribute.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHCollectionKeyElementDefinition.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHCollectionKeyManyToManyElement.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHCollectionKeyOneToManyElement.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\BaseNHCollectionElementDefinition.cs" />
+    <Compile Include="AutoPersistance\IDGenerationTypes.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHClass.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHComponent.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHIDGenerator.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHIDPropertyElement.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHMap.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHProperty.cs" />
+    <Compile Include="AutoPersistance\Builders\For\PrimaryKeys\PrimaryKeyBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\PrimaryKeys\PrimaryKeyNameBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\Properties\PropertyBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\For\Subclasses\SubClassBuilder.cs" />
+    <Compile Include="AutoPersistance\Builders\VersionDeclarationBuilder.cs" />
+    <Compile Include="AutoPersistance\Conventions\EntityCollectionConventionTypes.cs" />
+    <Compile Include="AutoPersistance\Conventions\IEntityCollectionsConvention.cs" />
+    <Compile Include="AutoPersistance\Core\AbstractAutoPersistanceModel.cs" />
+    <Compile Include="AutoPersistance\Core\AutoPersistanceModel.cs" />
+    <Compile Include="AutoPersistance\Core\BaseRelationshipStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\DefaultPropertyNamingStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\ORMUtils.cs" />
+    <Compile Include="AutoPersistance\Core\ModelConvention.cs" />
+    <Compile Include="AutoPersistance\Core\DefaultConvention.cs" />
+    <Compile Include="AutoPersistance\Core\EntityModel.cs" />
+    <Compile Include="AutoPersistance\Core\EntityNamespace.cs" />
+    <Compile Include="AutoPersistance\Core\ForeignKeyNamingConvention.cs" />
+    <Compile Include="AutoPersistance\Core\IAutoPersistanceModel.cs" />
+    <Compile Include="AutoPersistance\Core\IConventionProvider.cs" />
+    <Compile Include="AutoPersistance\Core\Inflector.cs" />
+    <Compile Include="AutoPersistance\Core\IPersistanceModelProvider.cs" />
+    <Compile Include="AutoPersistance\Core\IRelationship.cs" />
+    <Compile Include="AutoPersistance\Core\ManyToManyNamingConvention.cs" />
+    <Compile Include="AutoPersistance\Core\ManyToManyRelationshipStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\ManyToOneRelationshipStrategy.cs" />
+    <Compile Include="AutoPersistance\Core\MemberAccessConvention.cs" />
+    <Compile Include="AutoPersistance\Core\PrimaryKeyColumnConvention.cs" />
+    <Compile Include="AutoPersistance\Core\PropertyConvention.cs" />
+    <Compile Include="AutoPersistance\Core\RelationshipDefinitionType.cs" />
+    <Compile Include="AutoPersistance\Core\VersioningConvention.cs" />
+    <Compile Include="AutoPersistance\LocalMappingConventionProvider.cs" />
+    <Compile Include="AutoPersistance\LocalPersistanceModelProvider.cs" />
+    <Compile Include="AutoPersistance\Persistance\IPersistanceStrategy.cs" />
+    <Compile Include="AutoPersistance\Persistance\Strategies\DefaultPersistanceStrategy.cs" />
+    <Compile Include="AutoPersistance\Schema\Elements\NHVersionProperty.cs" />
+    <Compile Include="AutoPersistance\Strategies\IColumnNamingStrategy.cs" />
+    <Compile Include="Extensions\CollectionExtentions.cs" />
+    <Compile Include="ForTesting\BaseAutoPersistanceTestFixture.cs" />
+    <Compile Include="HttpModule\NHibernateSessionPerRequestHttpModule.cs" />
+    <Compile Include="Repository\AbstractQuerySpecification.cs" />
+    <Compile Include="Repository\IQuerySpecification.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\IRepositoryFactory.cs" />
+    <Compile Include="Repository\NHibernateAutoPersistanceRepositoryFactory.cs" />
+    <Compile Include="Repository\NHibernateRepository.cs" />
+    <Compile Include="Repository\NHibernateRepositoryFactory.cs" />
+    <Compile Include="Repository\NHibernateSessionManager.cs" />
+    <Compile Include="Repository\PaginatedResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

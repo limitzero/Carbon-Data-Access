@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.Customer">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAUAAAAAABAEBAAgQAAAABAAAAAAAAAEBAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\Customer.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Name" />
+      <Property Name="BillingAddress" />
+      <Property Name="ShippingAddress" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.Order">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAEAAAAIAAAQBAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Customer" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrderLines" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.Product">
+    <Position X="8.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACIAAAAAAoAAAEAgBAAAQAAAAAAAAAAAgAEAAAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.OrderLine">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAACAAAAAAAFAABAAAAAAAAAAAAAAIAAgAAAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\OrderLine.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.Address">
+    <Position X="3" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAEAAAAABAAAAIIAAECAAAAAAAAAAAAAAABEACAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.BillingAddress">
+    <Position X="0.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\BillingAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.ShippingAddress">
+    <Position X="6.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\ShippingAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineCart.Model.Name">
+    <Position X="3.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAYAAAAAAAAAAAAAAAAAAQAASAAAAAAA=</HashCode>
+      <FileName>Domains\OnlineCart\Model\Name.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

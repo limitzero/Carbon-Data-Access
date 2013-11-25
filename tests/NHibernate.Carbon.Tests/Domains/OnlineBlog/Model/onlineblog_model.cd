@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineBlog.Model.Post" Collapsed="true">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAAAEIAAAEAAAABBAAAAAAACAAAgQAAEAAAIcAA=</HashCode>
+      <FileName>Domains\OnlineBlog\Model\Post.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Comments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineBlog.Model.Comment" Collapsed="true">
+    <Position X="7.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAQAAABAAAAACAACAAAoAAAACAAACAA=</HashCode>
+      <FileName>Domains\OnlineBlog\Model\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHibernate.Carbon.Tests.Domains.OnlineBlog.Model.Blog" Collapsed="true">
+    <Position X="1.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIBgAEQEBABIAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domains\OnlineBlog\Model\Blog.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Posts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

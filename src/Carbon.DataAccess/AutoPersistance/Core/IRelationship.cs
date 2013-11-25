@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// Contract for building relationships between entities

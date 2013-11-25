@@ -1,16 +1,19 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
+	/// <summary>
+	/// Strategy to realize the many to one realization of an parent entity to child entity.
+	/// </summary>
+	[Optimization("For many to one associations on entities, the parent will be assumed to be present on child object for association (not-null = 'true').")]
     public class ManyToOneRelationshipStrategy : BaseRelationshipStrategy, IRelationship
     {
-        private Convention _convention = null;
-        private Type _entity = null;
+        private readonly ModelConvention _convention;
+        private readonly System.Type _entity;
 
-        public ManyToOneRelationshipStrategy(Convention convention, Type entity)
+        public ManyToOneRelationshipStrategy(ModelConvention convention, System.Type entity)
         {
             _convention = convention;
             _entity = entity;
@@ -20,65 +23,48 @@ namespace Carbon.Repository.AutoPersistance.Core
         {
             string results = string.Empty;
 
-            //only examine the properties that are currently domain model objects;
-            IList<PropertyInfo> modelAsProperties = GetPropertiesDefinedAsModelEntitiesFor(_entity);
-                                                                                                                                             
-            IList<Type> entitiesInConstructor = GetModelEntitiesDefinedInConstructorFor(_entity, ORMUtils.FindAllEntities(_convention,_entity.Assembly));
+			// find all of the entities defined on the current domain model entity (i.e. associations):
+        	IList<System.Type> entityAssociations = this.GetModelEntitiesDefinedOnCurrentEntity(_entity,
+        	                                                                                       ORMUtils.FindAllEntities
+        	                                                                                       	(_convention,
+        	                                                                                       	 _entity.Assembly));
 
-            foreach (Type constructorEntity in entitiesInConstructor)
+            foreach (System.Type entityAssociation in entityAssociations)
             {
-                results += GetManyToOneRelationshipDefinitonFor(constructorEntity, _entity);
-            }
-
-            /*
-            Type parentEntity = null;
-            if (IsModelEntityDefinedInConstructorFor(_entity, GetModelEntitiesAsTypes(_entity.Assembly), out parentEntity))
-            {
-                results = GetManyToOneRelationshipDefinitonFor(parentEntity, _entity);
-            }
-             */
-
-            return results;
-        }
-
-        private IList<Type> GetModelEntitiesDefinedInConstructorFor(Type entity, IList<Type> modelEntities)
-        {
-            IList<Type> results = new List<Type>(); 
-
-            ConstructorInfo[] constructors = entity.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-            ConstructorInfo theConstructor = null; 
-
-            foreach (ConstructorInfo info in constructors)
-            {
-                if(theConstructor == null)
-                {
-                    theConstructor = info;    
-                }
-
-                // find the greediest constructor for basing this relationship on:
-                if(theConstructor.GetParameters().Length < info.GetParameters().Length)
-                {
-                    theConstructor = info;
-                }
-            }
-
-            foreach (ParameterInfo param in theConstructor.GetParameters())
-            {
-                if (modelEntities.Contains(param.ParameterType) && ORMUtils.FindIdentityFieldFor(_convention, param.ParameterType) != null)
-                {
-                    if (!results.Contains(param.ParameterType))
-                        results.Add(param.ParameterType);
-                }
+                results += GetManyToOneRelationshipDefinitonFor(entityAssociation, _entity);
             }
 
             return results;
         }
 
-        private string GetManyToOneRelationshipDefinitonFor(Type parentEntity, Type _entity)
+		private IList<System.Type> GetModelEntitiesDefinedOnCurrentEntity(System.Type entity, IList<System.Type> modelEntities)
+		{
+			IList<System.Type> entities = new List<System.Type>();
+
+			// look on the current entity and find all possible entities that are defined as properties:
+			var properties = entity.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+			foreach (var property in properties)
+			{
+				// exclude collections and arrays in this relationship binding (left for many-to-many binding):
+				if(property.PropertyType.IsGenericType == true || property.PropertyType.Name.Contains("[]") == true) continue;
+
+				if (modelEntities.Contains(property.PropertyType) &&
+					ORMUtils.FindIdentityFieldFor(_convention, property.PropertyType) != null)
+				{
+					if (entities.Contains(property.PropertyType) == false)
+						entities.Add(property.PropertyType);
+				}
+			}
+
+			return entities;
+		}
+
+        private string GetManyToOneRelationshipDefinitonFor(System.Type parentEntity, System.Type entity)
         {
             StringBuilder results = new StringBuilder();
 
-            IList<PropertyInfo> parentProperties = GetPropertiesDefinedAsModelEntitiesFor(_entity);
+            IList<PropertyInfo> parentProperties = GetPropertiesDefinedAsModelEntitiesFor(entity);
             PropertyInfo parentProperty = null;
 
             //scan all of the properties on the "many" side of the relationship looking for 
@@ -92,50 +78,25 @@ namespace Carbon.Repository.AutoPersistance.Core
                 }
             }
 
-            results.Append(string.Format("<!-- many \"{0}\" are associated with one instance of a \"{1}\" -->", _entity.Name, parentEntity.Name));
+            results.Append(string.Format("<!-- many \"{0}\" are associated with one instance of a \"{1}\" -->", entity.Name, parentEntity.Name));
             results.Append("\r\n");
-            results.Append(string.Format("<many-to-one name=\"{0}\" class=\"{1}\" cascade=\"all\" access=\"{2}\"  column=\"{3}\" foreign-key=\"{4}\" fetch=\"join\" not-found=\"ignore\" />",
+
+			// OPTIMIZATION: parent will always be present on child for association (not-null = "true")
+            results.Append(string.Format("<many-to-one name=\"{0}\" class=\"{1}\" cascade=\"all\" access=\"{2}\"  column=\"{3}\" foreign-key=\"{4}\" fetch=\"join\" not-found=\"ignore\"  not-null=\"true\"/>",
                                          parentProperty.Name,
 										 RelationshipDefinition.CreateQualifiedName(parentEntity),
                                          _convention.MemberAccess.Strategy,
                                          base.BuildPrimaryKeyColumnName(_convention, parentEntity),
-                                         base.BuildForeignKeyName(_convention, parentEntity, _entity)));
+                                         base.BuildForeignKeyName(_convention, parentEntity, entity)));
             results.Append("\r\n");
 
             return results.ToString();
         }
 
-        private bool IsModelEntityDefinedInConstructorFor(Type entity, IList<Type> modelEntityTypes, out Type parentEntityType)
-        {
-            bool results = false;
-            Type parentEntity = null;
-            
-            ConstructorInfo[] constructors = entity.GetConstructors(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
-
-            foreach(ConstructorInfo info in constructors)
-            {
-                foreach(ParameterInfo param in info.GetParameters())
-                {
-                    if (modelEntityTypes.Contains(param.ParameterType))
-                    {
-                        parentEntity = param.ParameterType;
-                        results = true;
-                        break;
-                    }
-                }
-
-                if (results == true)
-                    break;
-            }
-
-            parentEntityType = parentEntity;
-            return results;
-        }
-
-        private IList<PropertyInfo> GetPropertiesDefinedAsModelEntitiesFor(Type entity)
+        private IList<PropertyInfo> GetPropertiesDefinedAsModelEntitiesFor(System.Type entity)
         {
             IList<PropertyInfo> results = new List<PropertyInfo>();
-            IList<Type> modelTypes = GetModelEntitiesAsTypes(entity.Assembly); 
+            IList<System.Type> modelTypes = GetModelEntitiesAsTypes(entity.Assembly); 
 
             foreach (PropertyInfo property in _entity.GetProperties())
             {
@@ -148,10 +109,10 @@ namespace Carbon.Repository.AutoPersistance.Core
             return results;
         }
 
-        private IList<Type> GetModelEntitiesAsTypes(Assembly asm)
+        private IList<System.Type> GetModelEntitiesAsTypes(Assembly asm)
         {
-            IList<Type> results = new List<Type>();
-            foreach (Type type in asm.GetTypes())
+            IList<System.Type> results = new List<System.Type>();
+            foreach (System.Type type in asm.GetTypes())
             {
                 if (type.IsClass && !type.IsAbstract)
                     results.Add(type);

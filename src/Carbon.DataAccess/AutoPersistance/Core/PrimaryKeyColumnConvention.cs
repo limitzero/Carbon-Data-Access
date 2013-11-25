@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// This is the general strategy that is used to define primary key for each entity that NHibernate will use to for persistance and retreival.
     /// </summary>
-    /// <typeparam name="T">Referenced convention <seealso cref="Convention"/> for model generation.</typeparam>
+    /// <typeparam name="T">Referenced convention <seealso cref="ModelConvention"/> for model generation.</typeparam>
     public class PrimaryKeyColumnConvention<T>
     {
         private string _primaryKeyPropertyName = string.Empty;
@@ -45,21 +41,33 @@ namespace Carbon.Repository.AutoPersistance.Core
             return _reference;
         }
 
+		/// <summary>
+		/// Gets the indicator if the entity primary key name will be of the form {lower case entity name}ID
+		/// </summary>
         public bool IsLowerCaseEntityNameFollowedByID
         {
             get { return _isLowerCaseEntityNameFollowedByID; }
         }
 
+		/// <summary>
+		/// Gets the indicator if the entity primary key name will be of the form {entity name}ID
+		/// </summary>
         public bool IsEntityNameFollowedByID
         {
             get { return _isEntityNameFollowedByID; }
         }
 
+		/// <summary>
+		/// Gets the indicator if the entity primary key name will be of the form pk_{entity name}ID
+		/// </summary>
         public bool IsLowerCasePKUnderscoreEntityName
         {
             get { return _isLowerCasePKUnderscoreEntityName; }
         }
 
+		/// <summary>
+		/// Gets the indicator if the entity primary key name will be of the form pk_{entity name}_ID
+		/// </summary>
         public bool IsLowerCasePKUnderscoreEntityNameUnderscoreID
         {
             get { return _isLowerCasePKUnderscoreEntityNameUnderscoreID; }
@@ -74,30 +82,51 @@ namespace Carbon.Repository.AutoPersistance.Core
             get { return _memberAccessConvention; }
         }
 
+		/// <summary>
+		/// This will render the primary key name in the data store as lower case {entity name}ID.
+		/// </summary>
+		/// <returns></returns>
         public T RenderAsLowerCaseEntityNameFollowedByID()
         {
             _isLowerCaseEntityNameFollowedByID = true;
             return _reference;
         }
 
+		/// <summary>
+		/// This will render the primary key name in the data store as {entity name}ID.
+		/// </summary>
+		/// <returns></returns>
         public T RenderAsEntityNameFollowedByID()
         {
             _isEntityNameFollowedByID = true;
             return _reference;
         }
 
+		/// <summary>
+		/// This will render the primary key name in the data store as  PK_{entity name}ID.
+		/// </summary>
+		/// <returns></returns>
         public T RenderAsLowerCasePKUnderscoreEntityName()
         {
             _isLowerCasePKUnderscoreEntityName = true;
             return _reference;
         }
 
+		/// <summary>
+		/// This will render the primary key name in the data store as  pk_{entity name}_ID.
+		/// </summary>
+		/// <returns></returns>
         public T RenderAsLowerCasePKUnderscoreEntityNameUnderscoreID()
         {
             _isLowerCasePKUnderscoreEntityNameUnderscoreID = true;
             return _reference;
         }
 
+		/// <summary>
+		/// This will render the the primary key name for the entity as determined by the convention.
+		/// </summary>
+		/// <param name="entityname">Name of the entity</param>
+		/// <returns></returns>
         public string CreateConvention(string entityname)
         {
             string retval = string.Empty;

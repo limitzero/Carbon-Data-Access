@@ -1,21 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using NHibernate.Carbon.Repository;
 
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
-    public interface IAutoPersistanceModel
+    public interface IAutoPersistanceModel : IDisposable
     {
         /// <summary>
         /// Read-only. Contains the collection of entity maps for persistance. 
         /// </summary>
-        IList<string> Maps { get; }
+        IDictionary<System.Type, string> Maps { get; }
 
         /// <summary>
         /// (Read-Only). Contains the collection of all entities found from the target assembly for creating 
         /// the entity relation mappings.
         /// </summary>
-        ICollection<Type> Entities { get; }
+        ICollection<System.Type> Entities { get; }
 
         /// <summary>
         /// (Read-Only). This will return the assembly of the domain model that is inspected for auto-persistance.
@@ -43,18 +44,16 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// </summary>
         bool IsSchemaDropped { get; }
 
-        /// <summary>
+    	/// <summary>
+    	/// Gets the value to indicate whether or not the model has been built.
+    	/// </summary>
+    	bool IsBuilt { get; }
+
+    	/// <summary>
         /// Retrieves all of the maps for the entities as one xml document.
         /// </summary>
         /// <returns></returns>
         string GetMaps();
-
-        /// <summary>
-        /// Retrieves a map of an entity at a specific index.
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        string GetMaps(int index);
 
         /// <summary>
         /// This will retreive a map for a particular entity.
@@ -109,7 +108,7 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// <summary>
         /// This will build the model for persisting entities to the indicated data store.
         /// </summary>
-        void Build();
+		void Build(bool useApplicationConfigurationForSettings = false);
 
         /// <summary>
         /// This will create the data schema for persistance based on the model in the data store.
@@ -120,5 +119,13 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// This will delete the data schema for persistance based on the model from the data store.
         /// </summary>
         void DropSchema();
+
+		/// <summary>
+		/// This will return an instance of the <seealso cref="NHibernateRepository{T}"/> for a specific 
+		/// class for basic data retrieval and persistance operations.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+    	NHibernateRepository<T> GetRepositoryFor<T>() where T : class;
     }
 }

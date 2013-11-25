@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carbon.DataAccess", "src\Carbon.DataAccess\Carbon.DataAccess.csproj", "{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Carbon", "src\Carbon.DataAccess\NHibernate.Carbon.csproj", "{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carbon.DataAccess.Tests", "tests\Carbon.DataAccess.Tests\Carbon.DataAccess.Tests.csproj", "{4C3F5976-BD2B-4017-9B32-4A10FBE2FB5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Carbon.Tests", "tests\Carbon.DataAccess.Tests\NHibernate.Carbon.Tests.csproj", "{4C3F5976-BD2B-4017-9B32-4A10FBE2FB5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// This is the general strategy that is used to define many-to-many relationships that NHibernate will use to persist values of the entity.
     /// </summary>
-    /// <typeparam name="T">Referenced convention <seealso cref="Convention"/> for model generation.</typeparam>
+    /// <typeparam name="T">Referenced convention <seealso cref="ModelConvention"/> for model generation.</typeparam>
     public class ManyToManyNamingConvention<T>
     {
         private bool _createAsSet = false;
@@ -48,6 +44,14 @@ namespace Carbon.Repository.AutoPersistance.Core
             return _reference;
         }
 
+		/// <summary>
+		/// This will cause the collection of many to many or many to one objects to be rendered in a "set"
+		/// which is a list of non-repeating elements. The data persisted in the database will have to be 
+		/// resident in this fashion in order for the elements not to trigger an exception noting duplicates
+		/// for the underlying data type of the property containing the listing of the elements that supports
+		/// non-repeating elements (i.e. "sets").
+		/// </summary>
+		/// <returns></returns>
         public T RenderAsSet()
         {
             _createAsSet = true;

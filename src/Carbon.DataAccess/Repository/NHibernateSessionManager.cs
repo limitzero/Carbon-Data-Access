@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Remoting.Messaging;
 using System.Web;
-using Carbon.Repository.AutoPersistance.Core;
-using NHibernate;
+using NHibernate.Carbon.AutoPersistance.Core;
 using NHibernate.Cfg;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Adapted from Billy McCaffrey's NHibernate Best Practices for use with the Auto Persistance Model
@@ -18,7 +16,6 @@ namespace Carbon.Repository.Repository
     {
         private const string DEFAULT_NHIBERNATE_CONFIGURATION_FILE = @"hibernate.cfg.xml";
         private const string CONTEXT_SESSIONS = "context.sessions";
-        private static NHibernateSessionManager _instance = null;
         private static IDictionary<string, ISessionFactory> _session_factories = null;
         private static IDictionary<string, ISession> _context_sessions = null;
         private static IDictionary<string, IAutoPersistanceModel> _context_persistance_models = null;

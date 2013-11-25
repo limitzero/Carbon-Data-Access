@@ -1,6 +1,4 @@
-using System;
-
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Factory for creating repositories based on type from the 

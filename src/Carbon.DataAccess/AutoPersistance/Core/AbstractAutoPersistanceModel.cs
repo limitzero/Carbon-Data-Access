@@ -1,10 +1,9 @@
 using System;
-using Carbon.Repository.AutoPersistance.Persistance;
-using NHibernate;
 using System.Reflection;
+using NHibernate.Carbon.AutoPersistance.Persistance;
 using NHibernate.Cfg;
 
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// Local set up fixture for testing interactions  with a database via NHibernate settings.
@@ -76,7 +75,7 @@ namespace Carbon.Repository.AutoPersistance.Core
                 m_model = model;
                 m_sessionFactory = null;
                 var maps = model.GetMaps();
-                System.Diagnostics.Debug.WriteLine("Entity Mapping: \r" + AutoPersistanceModel.FormatEntityHBMContents(maps));
+                System.Diagnostics.Debug.WriteLine("Entity Mapping: \r" + AutoPersistanceModel.FormatEntityHbmContents(maps));
             }
             catch (Exception exc)
             {

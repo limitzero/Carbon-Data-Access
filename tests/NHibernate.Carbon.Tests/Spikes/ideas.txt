@@ -1,0 +1,43 @@
+﻿public interface IIDNamingConvention<TEntity>
+{
+	IDNameMap<TEntity> IDNameMapConvention {get; private set;}
+	void Configure(Action<TEntity> nameAction, string alias);
+}
+
+public class IDNameMap<TEntity> where TEntity : class
+{
+	public string IDColumn {get; private set;}
+	public string IDColumnAlias {get; private set;}
+
+	public IDNameMap(Expression<Func<TEntity>> mapAction, string name)
+	{
+		this.CreateMap(mapAction, name);
+	}
+
+	private void CreateMap(Expression<Func<TEntity>> mapAction, string alias)
+	{	
+			string name = string.Empty;
+			MemberExpression member = null;
+
+			if (mapAction.Body is UnaryExpression)
+			{
+				var unaryExp = mapAction.Body as UnaryExpression;
+				member = unaryExp.Operand as MemberExpression;
+			}
+			else
+			{
+				member = mapAction.Body as MemberExpression;
+			}
+
+			if (member != null)
+			{
+				if (member.Member != null)
+				{
+					name = member.Member.Name;
+				}
+			}
+
+			this.IDColumn = name;
+			this.IDColumnAlias = alias;
+	}
+}

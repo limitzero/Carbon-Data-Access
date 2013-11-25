@@ -1,78 +1,80 @@
-using System;
 using System.Collections.Generic;
 using System.Text;
-using Carbon.Repository.AutoPersistance.Core;
-using Giza.ORM.ForNHibernate.Builders;
+using NHibernate.Carbon.AutoPersistance.Builders.For.Components;
+using NHibernate.Carbon.AutoPersistance.Builders.For.PrimaryKeys;
+using NHibernate.Carbon.AutoPersistance.Builders.For.Properties;
+using NHibernate.Carbon.AutoPersistance.Builders.For.Subclasses;
+using NHibernate.Carbon.AutoPersistance.Core;
 
-namespace Carbon.Repository.AutoPersistance.Builders
+namespace NHibernate.Carbon.AutoPersistance.Builders
 {
     public class EntityBuilder : ICanBuildEntityDefinition
     {
-        private IList<Type> m_renderedEntities = new List<Type>();
-        private Convention m_convention = null;
-        private Type m_entity = null;
+        private IList<System.Type> _renderedEntities = new List<System.Type>();
+        private ModelConvention _convention = null;
+        private System.Type _entity = null;
 
         public EntityBuilder()
             : this(null, null)
         {
         }
 
-        public EntityBuilder(Convention convention, Type entity)
+        public EntityBuilder(ModelConvention convention, System.Type entity)
         {
-            m_convention = convention;
-            m_entity = entity;
+            _convention = convention;
+            _entity = entity;
         }
 
         #region IBuilder Members
 
-        public Convention Convention
+        public ModelConvention Convention
         {
             get
             {
-                return m_convention;
+                return _convention;
             }
             set
             {
-                m_convention = value;
+                _convention = value;
             }
         }
 
-        public Type Entity
+        public System.Type Entity
         {
             get
             {
-                return m_entity;
+                return _entity;
             }
             set
             {
-                m_entity = value;
+                _entity = value;
             }
         }
 
-        public IList<Type> RenderedEntities
+        public IList<System.Type> RenderedEntities
         {
-            get { return m_renderedEntities; }
+            get { return _renderedEntities; }
         }
 
         public string Build()
         {
             StringBuilder document = new StringBuilder();
 
-            ICanBuildPrimaryKey primaryBuilder = new PrimaryKeyBuilder(m_convention, m_entity);
-            ICanBuildProperty propertyBuilder = new PropertyBuilder(m_convention, m_entity);
-            ICanBuildComponent componentBuilder = new ComponentBuilder(m_convention, m_entity);
-            ICanBuildSubClass subclassBuilder = new SubClassBuilder(m_convention, m_entity);
-            ManyToOneRelationshipStrategy many2OneBuilder = new ManyToOneRelationshipStrategy(m_convention, m_entity);
-            ManyToManyRelationshipStrategy many2ManyBuilder = new ManyToManyRelationshipStrategy(m_convention, m_entity);
+            IPrimaryKeyBuilder primaryBuilder = new PrimaryKeyBuilder(_convention, _entity);
+            ICanBuildProperty propertyBuilder = new PropertyBuilder(_convention, _entity);
+            IComponentBuilder componentBuilderBuilder = new ComponentBuilder(_convention, _entity);
+            ISubclassBuilder subclassBuilder = new SubClassBuilder(_convention, _entity);
+            ManyToOneRelationshipStrategy many2OneBuilder = new ManyToOneRelationshipStrategy(_convention, _entity);
+            ManyToManyRelationshipStrategy many2ManyBuilder = new ManyToManyRelationshipStrategy(_convention, _entity);
 
-            document.Append(string.Format("<!-- entity: {0} -->", m_entity.Name));
+            document.Append(string.Format("<!-- entity: {0} -->", _entity.Name));
             document.Append("\r\n");
 
             document.Append("<class");
-            document.Append(ORMUtils.BuildAttribute("name", m_entity.Name));
+            document.Append(ORMUtils.BuildAttribute("name", _entity.Name));
 
-            if (m_convention.CanPluralizeTableNames)
-                document.Append(ORMUtils.BuildAttribute("table", ORMUtils.Pluralize(m_entity.Name)));
+            if (_convention.CanPluralizeTableNames)
+                document.Append(ORMUtils.BuildAttribute("table", ORMUtils.Pluralize(_entity.Name)));
 
             //document.Append(MappingHelper.BuildAttribute("where", visitee.FilterCondition));
 
@@ -85,8 +87,8 @@ namespace Carbon.Repository.AutoPersistance.Builders
             document.Append(propertyBuilder.Build());
             document.Append("\r\n");
 
-            componentBuilder.PropertiesForInspection = propertyBuilder.ExcludedProperties;
-            document.Append(componentBuilder.Build());
+            componentBuilderBuilder.PropertiesForInspection = propertyBuilder.ExcludedProperties;
+            document.Append(componentBuilderBuilder.Build());
             document.Append("\r\n");
 
             document.Append(subclassBuilder.Build());
@@ -97,7 +99,7 @@ namespace Carbon.Repository.AutoPersistance.Builders
             // made:
             if (subclassBuilder.SubClassedEntities.Count > 0)
             {
-                m_renderedEntities = subclassBuilder.SubClassedEntities;
+                _renderedEntities = subclassBuilder.SubClassedEntities;
             }
 
             document.Append(many2OneBuilder.Build());

@@ -1,26 +1,24 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     public class EntityModel
     {
-        private Type _entity = null;
-        private IList<Type> _implementedentities = new List<Type>(); 
+        private System.Type _entity = null;
+        private IList<System.Type> _implementedentities = new List<System.Type>(); 
 
-        public EntityModel(Type entity, IList<Type> implementedEntities)
+        public EntityModel(System.Type entity, IList<System.Type> implementedEntities)
         {
             _entity = entity;
             _implementedentities = implementedEntities;
         }
 
-        public Type Entity
+        public System.Type Entity
         {
             get { return _entity; }
         }
 
-        public IList<Type> ImplementedEntities
+        public IList<System.Type> ImplementedEntities
         {
             get { return _implementedentities; }
         }

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Transform;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Concrete implemenation of a repository based on NHibernate
@@ -86,7 +85,7 @@ namespace Carbon.Repository.Repository
                 RunInTransaction(() => _session.Delete(item));
         }
 
-        private void RunInTransaction(Action action)
+        private void RunInTransaction(System.Action action)
         {
             using (var tx = _session.BeginTransaction())
             {
@@ -95,7 +94,7 @@ namespace Carbon.Repository.Repository
                     action.Invoke();
                     tx.Commit();
                 }
-                catch (Exception exception)
+                catch 
                 {
                     tx.Rollback();
                     throw;
@@ -109,7 +108,7 @@ namespace Carbon.Repository.Repository
             PrepareSpecification(specification, null);
         }
 
-        private void PrepareSpecification(AbstractQuerySpecification<T> specification, IList<T> source)
+        private void PrepareSpecification(AbstractQuerySpecification<T> specification, IList<T> source = null)
         {
             specification.Session = _session;
             if(specification.Source == null)

@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// This is the general strategy that is used to define entity properties that NHibernate will use to persist values of the entity.
     /// </summary>
-    /// <typeparam name="T">Referenced convention <seealso cref="Convention"/> for model generation.</typeparam>
+    /// <typeparam name="T">Referenced convention <seealso cref="ModelConvention"/> for model generation.</typeparam>
     public class PropertyConvention<T>
     {
         private T _reference = default(T);
@@ -54,6 +52,10 @@ namespace Carbon.Repository.AutoPersistance.Core
             return _reference;
         }
 
+		/// <summary>
+		/// This will set the configuration of all mapped entity properties to lower case column names in the data store.
+		/// </summary>
+		/// <returns></returns>
         public T RenderAsLowerCaseInRepository()
         {
             _canRenderAsLowerCase = true;

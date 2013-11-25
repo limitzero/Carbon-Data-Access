@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// This is the general access strategies that NHibernate will use to load the data to the associated field or property on the referenced object.
     /// </summary>
-    /// <typeparam name="T">Referenced convention <seealso cref="Convention"/> for model generation.</typeparam>
+    /// <typeparam name="T">Referenced convention <seealso cref="ModelConvention"/> for model generation.</typeparam>
     public class MemberAccessConvention<T>
     {
         private T _reference = default(T);
@@ -83,18 +79,39 @@ namespace Carbon.Repository.AutoPersistance.Core
             return _reference;
         }
 
+		/// <summary>
+		/// This will set the member access as _{lower case property name}.  
+		/// Ex: 
+		/// private string _firstName; // member accessed to set value
+		/// public string FirstName {get {return _firstName}; private {_firstName = value};}
+		/// </summary>
+		/// <returns></returns>
         public T NoSetterCamelCaseUnderscore()
         {
             _access = "nosetter.camelcase-underscore";
             return _reference;
         }
 
+		/// <summary>
+		/// This will set the member access as {lower case property name}.  
+		/// Ex: 
+		/// private string name; // member accessed to set value
+		/// public string Name {get {return name}; private {name = value};}
+		/// </summary>
+		/// <returns></returns>
         public T NoSetterLowerCase()
         {
             _access = "nosetter.lowercase";
             return _reference;
         }
 
+		/// <summary>
+		/// This will set the member access as {lower case property name}.  
+		/// Ex: 
+		/// private string _name; // member accessed to set value
+		/// public string Name {get {return _name}; private {_name = value};}
+		/// </summary>
+		/// <returns></returns>
         public T NoSetterLowerCaseUnderscore()
         {
             _access = "nosetter.lowercase-underscore";

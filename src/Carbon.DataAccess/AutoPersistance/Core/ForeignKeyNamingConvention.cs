@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     /// <summary>
     /// This is the general strategy that is used to define foreign key names that NHibernate will use to associate one entity with another.
     /// </summary>
-    /// <typeparam name="T">Referenced convention <seealso cref="Convention"/> for model generation.</typeparam>
+    /// <typeparam name="T">Referenced convention <seealso cref="ModelConvention"/> for model generation.</typeparam>
     public class ForeignKeyNamingConvention<T>
     {
         private T _reference = default(T);

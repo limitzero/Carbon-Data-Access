@@ -1,6 +1,6 @@
-using Carbon.Repository.AutoPersistance.Core;
+using NHibernate.Carbon.AutoPersistance.Core;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Factory for creating repositories based on type from the 
@@ -20,11 +20,15 @@ namespace Carbon.Repository.Repository
         {
             NHibernateSessionManager.Instance.RegisterPersistanceModel(_model);
             var session = NHibernateSessionManager.Instance.GetSessionFor(_model.GetCurrentConfigurationFile());
-            return new NHibernateRepository<T>(_model.CurrentSessionFactory.OpenSession());
+            return new NHibernateRepository<T>(session);
         }
 
         public IRepository<T> CreateFor<T>(string configuration) where T : class
         {
+			// force re-build of model if configuration file is passed:
+			_model.ConfigurationFile(configuration);
+			_model.Build();
+
             return CreateFor<T>();
         }
     }

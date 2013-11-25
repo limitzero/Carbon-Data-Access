@@ -1,8 +1,11 @@
 using System.Collections.Generic;
-using NHibernate;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
+	/// <summary>
+	/// Implementation of specification pattern for encapsulating queries for information retreival.
+	/// </summary>
+	/// <typeparam name="T">Type of domain entity to retrieve</typeparam>
     public abstract class AbstractQuerySpecification<T> : IQuerySpecification<T> where T : class
     {
         public ISession Session { set; private get; }
@@ -42,7 +45,7 @@ namespace Carbon.Repository.Repository
         }
 
         /// <summary>
-        /// This will perform a filtering or search on the data based on the criteria object.
+        /// This will perform a filtering or search on the data based on the criteria object or other custom object.
         /// </summary>
         /// <returns></returns>
         public virtual IList<T> FilterViaCriteria()

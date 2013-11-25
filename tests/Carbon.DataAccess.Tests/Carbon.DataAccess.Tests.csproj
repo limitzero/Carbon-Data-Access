@@ -8,8 +8,8 @@
     <ProjectGuid>{4C3F5976-BD2B-4017-9B32-4A10FBE2FB5E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Carbon.DataAccess.Tests</RootNamespace>
-    <AssemblyName>Carbon.DataAccess.Tests</AssemblyName>
+    <RootNamespace>NHibernate.Carbon.Tests</RootNamespace>
+    <AssemblyName>NHibernate.Carbon.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>true</IsWebBootstrapper>
@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -84,7 +85,9 @@
     <Compile Include="AutoPersistance\PersistanceWithBaseClassTests.cs" />
     <Compile Include="Configurator.cs" />
     <Compile Include="Domain\Address.cs" />
+    <Compile Include="Domain\Customer.cs" />
     <Compile Include="Domain\HomeAddress.cs" />
+    <Compile Include="Domain\Name.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\OrderLine.cs" />
     <Compile Include="Domain\OrderPriority.cs" />
@@ -97,22 +100,9 @@
     <Compile Include="SqlCePersistanceStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Carbon.DataAccess\Carbon.DataAccess.csproj">
-      <Project>{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}</Project>
-      <Name>Carbon.DataAccess</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Domain\model.cd" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Domain\HomeAddress.hbm.xml" />
-    <EmbeddedResource Include="Domain\Order.hbm.xml" />
-    <EmbeddedResource Include="Domain\OrderLine.hbm.xml" />
-    <EmbeddedResource Include="Domain\OrderPriority.hbm.xml" />
-    <EmbeddedResource Include="Domain\OrderStatus.hbm.xml" />
-    <EmbeddedResource Include="Domain\Product.hbm.xml" />
-    <EmbeddedResource Include="Domain\ShippingAddress.hbm.xml" />
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,0 +1,76 @@
+using System.Text;
+using NHibernate.Carbon.AutoPersistance.Core;
+using NHibernate.Carbon.AutoPersistance.Schema.Elements;
+
+namespace NHibernate.Carbon.AutoPersistance.Builders
+{
+    public class PrimaryKeyBuilder : ICanBuildPrimaryKey
+    {
+        private ICanBuildPrimaryKeyName _builder = null;
+        private ModelConvention _convention = null;
+        private System.Type _entity = null;
+
+        public PrimaryKeyBuilder()
+            : this(null, null)
+        {
+
+        }
+
+        public PrimaryKeyBuilder(ModelConvention convention, System.Type entity)
+        {
+            _convention = convention;
+            _entity = entity;
+            _builder = new PrimaryKeyNameBuilder(_convention, _entity);
+        }
+
+        public ModelConvention Convention
+        {
+            get
+            {
+                return _convention;
+            }
+            set
+            {
+                _convention = value;
+            }
+        }
+
+        public System.Type Entity
+        {
+            get
+            {
+                return _entity;
+            }
+            set
+            {
+                _entity = value;
+            }
+        }
+
+        public string Build()
+        {
+            StringBuilder results = new StringBuilder();
+
+        	var idColumn = _entity.GetProperty(_convention.PrimaryKey.PrimaryKeyName);
+
+            if (idColumn != null)
+            {
+            	var property = new NHIDProperty().Build(_convention, _entity);
+            	results.Append(property.Serialize()).Append(System.Environment.NewLine);
+
+            	//results.Append("<id");
+            	//results.Append(ORMUtils.BuildAttribute("name", _convention.PrimaryKey.PrimaryKeyName));
+            	//results.Append(ORMUtils.BuildAttribute("column", _builder.Build()));
+            	//results.Append(ORMUtils.BuildAttribute("type", _entity.GetProperty(_convention.PrimaryKey.PrimaryKeyName).PropertyType.Name));
+            	//results.Append(ORMUtils.BuildAttribute("access", _convention.PrimaryKey.MemberAccess.Strategy));
+            	//results.Append(">").Append("\r\n");
+            	//results.Append("<generator class=\"identity\"/>");
+            	//results.Append("\r\n");
+            	//results.Append("</id>").Append("\r\n");
+            }
+
+            return results.ToString();
+        }
+
+    }
+}

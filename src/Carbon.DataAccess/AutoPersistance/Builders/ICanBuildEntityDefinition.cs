@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Carbon.Repository.AutoPersistance.Builders
+namespace NHibernate.Carbon.AutoPersistance.Builders
 {
     public interface ICanBuildEntityDefinition : IBuilder
     {
-        IList<Type> RenderedEntities { get; }
+        IList<System.Type> RenderedEntities { get; }
     }
 }

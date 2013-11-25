@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
 
-namespace Carbon.Repository.AutoPersistance.Builders
+namespace NHibernate.Carbon.AutoPersistance.Builders
 {
     /// <summary>
     /// Contract for constructing properties on the entity

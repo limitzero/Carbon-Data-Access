@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Carbon.Repository.Repository
+namespace NHibernate.Carbon.Repository
 {
     /// <summary>
     /// Actions that can be applied to the entity for persistance to the data store.

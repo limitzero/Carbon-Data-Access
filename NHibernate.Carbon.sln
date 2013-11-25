@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Carbon", "src\Carbon.DataAccess\NHibernate.Carbon.csproj", "{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Carbon.Tests", "tests\NHibernate.Carbon.Tests\NHibernate.Carbon.Tests.csproj", "{BBB016CB-809A-4572-BA1D-B4442C16E4B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA9C25B2-CC82-42A2-A8BE-45D04E9BE271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB016CB-809A-4572-BA1D-B4442C16E4B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB016CB-809A-4572-BA1D-B4442C16E4B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB016CB-809A-4572-BA1D-B4442C16E4B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB016CB-809A-4572-BA1D-B4442C16E4B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using NHibernate.Cfg;
 
-namespace Carbon.Repository.AutoPersistance.Persistance
+namespace NHibernate.Carbon.AutoPersistance.Persistance
 {
     public interface IPersistanceStrategy
     {

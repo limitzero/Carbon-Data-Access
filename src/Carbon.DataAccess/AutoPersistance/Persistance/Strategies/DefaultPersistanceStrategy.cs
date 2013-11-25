@@ -1,7 +1,7 @@
 using System;
 using NHibernate.Cfg;
 
-namespace Carbon.Repository.AutoPersistance.Persistance.Strategies
+namespace NHibernate.Carbon.AutoPersistance.Persistance.Strategies
 {
     /// <summary>
     /// This is the persistance strategy that will read the settings from the app.config file for NHibernate.
@@ -26,15 +26,7 @@ namespace Carbon.Repository.AutoPersistance.Persistance.Strategies
 
         public void Initialize()
         {
-
-            try
-            {
-                m_configuration = new NHibernate.Cfg.Configuration();
-            }
-            catch (Exception exception)
-            {                
-                throw;
-            }
+			m_configuration = new NHibernate.Cfg.Configuration();
         }
 
         #endregion

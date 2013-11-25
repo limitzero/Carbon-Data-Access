@@ -1,9 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 
-namespace Carbon.Repository.AutoPersistance.Core
+namespace NHibernate.Carbon.AutoPersistance.Core
 {
     public abstract class BaseRelationshipStrategy
     {
@@ -67,7 +64,7 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// <param name="convention"></param>
         /// <param name="entity"></param>
         /// <returns>String. Name of the primary key column</returns>
-        public string BuildPrimaryKeyColumnName(Convention convention, Type entity)
+        public string BuildPrimaryKeyColumnName(ModelConvention convention, System.Type entity)
         {
             string retval = string.Empty;
 
@@ -93,7 +90,7 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// <param name="parentEntity"></param>
         /// <param name="childEntity"></param>
         /// <returns>String. Name of the foreign key</returns>
-        public string BuildForeignKeyName(Convention convention, Type parentEntity, Type childEntity)
+        public string BuildForeignKeyName(ModelConvention convention, System.Type parentEntity, System.Type childEntity)
         {
             string retval = string.Empty;
 
@@ -115,14 +112,12 @@ namespace Carbon.Repository.AutoPersistance.Core
         /// <param name="parentEntity"></param>
         /// <param name="childEntity"></param>
         /// <returns>String: Name of the join table with no duplicates or overlaps</returns>
-        public string BuildJoinTableName(Convention convention, Type parentEntity, Type childEntity)
+        public string BuildJoinTableName(ModelConvention convention, System.Type parentEntity, System.Type childEntity)
         {
             string retval = string.Empty;
-            bool useInverse = false;
-
+           
             if (parentEntity.Name.ToLower() == childEntity.Name.ToLower())
                 return retval;
-
 
             if (convention.ManyToManyTableName.CreateWithParentEntityNameConcatenatedWithChildEntityNameNotPluralized)
             {
